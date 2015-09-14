@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+  <head>
+    <title>IFPA TGP Calculator</title>
+    <meta charset="utf-8">
+    <meta property="og:title" content="IFPA TGP Calculator">
+    <meta name="description" value="Calculate Tournament Grading Percentage (TGP) for IFPA pinball tournaments">
+    <meta name="og:description" content="{{$meta}}">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+    <style type="text/css">
+      body {
+        background:#eee;
+      }
+      .wrapper {
+        max-width:768px;
+        margin:0 auto;
+        padding:0 15px;
+      }
+      footer {
+        text-align:center;
+      }
+      .calculator-wrapper {
+        width:100%;
+        display:flex;
+        display:-webkit-flex;
+      }
+      .calculator {
+        flex:1 1 auto;
+        -webkit-flex:1 1 auto;
+      }
+      .results {
+        flex:0 0 250px;
+        -webkit-flex:0 0 250px;
+        margin-left:20px;
+      }
+      .box {
+        background:#fff;
+        padding:15px;
+        margin-bottom:20px;
+      }
+      .box.bg-warning {
+        background:#fcf8e3;
+      }
+      .box-title {
+        font-size:1.2em;
+        text-align:center;
+      }
+      .box-number {
+        margin-top:10px;
+        font-size:3em;
+        font-weight:bold;
+        text-align:center;
+      }
+      @media (max-width: 500px) {
+        h1 {
+          font-size:1.8em;
+        }
+        .calculator-wrapper {
+          display:block;
+        }
+        .results {
+          margin-left:0;
+        }
+        .box-number {
+          font-size:4em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>IFPA TGP Calculator (WPPR 5.2, 2016)</h1>
+      <div class="box bg-warning">A simple TGP calculator for <b>WPPR 5.2 (coming 2016)</b>. Based in <a href="http://www.ifpapinball.com/tgpguide2016">IFPA TGP Guide</a> and <a href="http://www.ifpapinball.com/menu/rankings-information-2016">WPPR 5.2</a>.</div>
+      <div class="calculator-wrapper">
+        <div class="calculator box">
+          <div class="form-group">
+            <label for="format">Tournament format</label>
+            <div class="radio">
+              <label>
+                <input type="radio" name="format" class="format-select" value="match_play" checked>
+                Match Play
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="format" class="format-select" value="knockout">
+                Knockout
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="format" class="format-select" value="pingolf">
+                Pingolf
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="format" class="format-select" value="best_game">
+                Best Game
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="format" class="format-select" value="best_game">
+                PAPA qualifying
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group hidden option option-knockout">
+            <label for="strikes">Number of strikes</label>
+            <div class="radio">
+              <label>
+                <input type="radio" name="strikes" class="strikes-select" value="2">
+                2 strikes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="strikes" class="strikes-select" value="3" checked>
+                3 strikes
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="strikes" class="strikes-select" value="4">
+                4 strikes
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group hidden option option-best_game option-pingolf">
+            <label for="games">Number of games / holes</label>
+            <select name="games" id="games" class="form-control games-select">
+              <option value="1">1 game</option>
+              <option value="2">2 games</option>
+              <option value="3">3 games</option>
+              <option value="4">4 games</option>
+              <option value="5">5 games</option>
+              <option value="6">6 games</option>
+              <option value="7">7 games</option>
+              <option value="8">8 games</option>
+              <option value="9">9 games</option>
+              <option value="10">10 games</option>
+              <option value="11">11 games</option>
+              <option value="12">12 games</option>
+              <option value="13">13 games</option>
+              <option value="14">14 games</option>
+              <option value="15">15 games</option>
+              <option value="16">16 games</option>
+              <option value="17">17 games</option>
+              <option value="18">18 games</option>
+              <option value="19">19 games</option>
+              <option value="20">20 games</option>
+            </select>
+            <div class="help-block">If you have a bank of 9 games, but are only counting 5 games for standings, select "5" above.</div>
+          </div>
+
+          <div class="form-group hidden option option-best_game">
+            <label for="scores">Number of scores counted for each game</label>
+            <select name="scores" id="scores" class="form-control scores-select">
+              <option value="1">Only Best Game</option>
+              <option value="2">2 best scores per game</option>
+              <option value="3">3 best scores per game</option>
+              <option value="4">4 best scores per game</option>
+              <option value="5">5 best scores per game</option>
+            </select>
+            <div class="help-block">If each player has more than one score from the same game used towards their standing, select how many above.</div>
+          </div>
+
+          <div class="form-group option option-match_play option-knockout">
+            <label for="group">Group size</label>
+            <div class="radio">
+              <label>
+                <input type="radio" name="group" value="2" class="group-select" checked> Head-to-Head
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="group" value="3" class="group-select"> Three-player groups
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="group" value="4" class="group-select"> Four-player groups
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group option option-match_play">
+            <label for="rounds">Number of rounds</label>
+            <select name="rounds" id="rounds" class="form-control rounds-select">
+              <option value="1">1 round</option>
+              <option value="2">2 rounds</option>
+              <option value="3">3 rounds</option>
+              <option value="4">4 rounds</option>
+              <option value="5">5 rounds</option>
+              <option value="6">6 rounds</option>
+              <option value="7">7 rounds</option>
+              <option value="8">8 rounds</option>
+              <option value="9">9 rounds</option>
+              <option value="10">10 rounds</option>
+              <option value="11">11 rounds</option>
+              <option value="12">12 rounds</option>
+              <option value="13">13 rounds</option>
+              <option value="14">14 rounds</option>
+              <option value="15">15 rounds</option>
+              <option value="16">16 rounds</option>
+              <option value="17">17 rounds</option>
+              <option value="18">18 rounds</option>
+              <option value="19">19 rounds</option>
+              <option value="20">20 rounds</option>
+            </select>
+          </div>
+
+          <div class="form-group option option-match_play">
+            <label for="games-per-round">Games per round</label>
+            <select name="games-per-round" id="games-per-round" class="form-control games-per-round-select">
+              <option value="1">1 game each round</option>
+              <option value="2">2 games each round</option>
+              <option value="3">3 games each round</option>
+              <option value="4">4 games each round</option>
+              <option value="5">5 games each round</option>
+              <option value="6">6 games each round</option>
+              <option value="7">7 games each round</option>
+            </select>
+          </div>
+
+          <div class="form-group hidden option option-knockout">
+            <label for="best-of">Games per round</label>
+            <select name="best-of" id="best-of" class="form-control best-of-select">
+              <option value="1">Best of 1 game per round</option>
+              <option value="3">Best of 3 games per round</option>
+              <option value="5">Best of 5 games per round</option>
+              <option value="7">Best of 7 games per round</option>
+            </select>
+          </div>
+
+          <div class="form-group hidden option option-knockout">
+            <label for="players">Number of players</label>
+            <input type="number" class="form-control players-select">
+          </div>
+        </div>
+        <div class="results">
+          <div class="form-group tgp-wrapper">
+            <div class="box"><div class="box-title">Meaningful games</div><div class="box-number text-success"><span class="meaningful-games">0</span></div></div>
+            <div class="box"><div class="box-title">TGP</div><div class="box-number text-success"><span class="tgp">0</span>%</div></div>
+          </div>
+          <div class="form-group hidden tgp-direct-notice text-danger small box">
+            This tournament will <b>only</b> be endorsed for WPPRs if you include a finals/playoffs component that involves <b>direct play</b> where at least <b>10%</b> but no more than <b>50%</b> of players participate.
+          </div>
+          <div class="form-group hidden tgp-error-wrapper box text-danger"></div>
+        </div>
+      </div>
+      <footer>Hosting provided by <a href="https://matchplay.events/">Match Play Events</a><br><a href="https://matchplay.events/">Run pinball tournaments on any device</a></footer>
+    </div>
+
+
+    <script src="src/IfpaTgpTournament.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+      var tournament = new IfpaTgpTournament();
+      tournament.setFormat('match_play');
+      tournament.setPlayersPerGame(2);
+      tournament.setRounds(1);
+      tournament.setGamesPerRound(1);
+      tournament.setStrikes(3);
+      tournament.setGames(1);
+      tournament.setScores(1);
+      tournament.setHours(0);
+
+      var updateTGP = function() {
+        var elmWrapper = $('.tgp-wrapper');
+        var elmError = $('.tgp-error-wrapper');
+        var elmNotice = $('.tgp-direct-notice');
+        try {
+          elmError.toggleClass('hidden', true);
+          elmWrapper.toggleClass('hidden', false);
+          elmNotice.toggleClass('hidden', tournament.isDirect());
+
+          elmWrapper.find('.meaningful-games').text(tournament.getMeaningfulGames());
+          elmWrapper.find('.tgp').text(tournament.getTGP());
+        } catch (e) {
+          elmWrapper.toggleClass('hidden', true);
+          elmNotice.toggleClass('hidden', true);
+          elmError.text(e).toggleClass('hidden', false);
+        }
+      }
+
+      // Tournament toggle
+      $(document).delegate('.format-select', 'change', function(e) {
+        $('.option').toggleClass('hidden', true);
+        $('.option-'+$(e.target).val()).toggleClass('hidden', false);
+        tournament.setFormat($(e.target).val());
+        updateTGP();
+      });
+
+      // Strikes select
+      $(document).delegate('.strikes-select', 'change', function(e) {
+        tournament.setStrikes(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+      // Players select
+      $(document).delegate('.players-select', 'input', function(e) {
+        tournament.setPlayers(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+      // Games select
+      $(document).delegate('.games-select', 'change', function(e) {
+        tournament.setGames(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+      // Scores select
+      $(document).delegate('.scores-select', 'change', function(e) {
+        tournament.setScores(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+      // Group select
+      $(document).delegate('.group-select', 'change', function(e) {
+        tournament.setPlayersPerGame(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+      // Rounds select
+      $(document).delegate('.rounds-select', 'change', function(e) {
+        tournament.setRounds(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+      // Games per round select
+      $(document).delegate('.games-per-round-select', 'change', function(e) {
+        tournament.setGamesPerRound(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+      $(document).delegate('.best-of-select', 'change', function(e) {
+        tournament.setGamesPerRound(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+    </script>
+  </body>
+</html>

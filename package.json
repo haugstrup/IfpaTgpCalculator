@@ -1,0 +1,13 @@
+{
+  "name": "IfpaTgp",
+  "version": "0.0.0",
+  "description": "TGP calculator for IFPA tournaments",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "author": "Andreas Haugstrup Pedersen",
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine": "^2.3.2"
+  }
+}
