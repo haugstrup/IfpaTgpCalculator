@@ -170,6 +170,34 @@
             <div class="help-block">If each player has more than one score from the same game used towards their standing, select how many above.</div>
           </div>
 
+          <div class="form-group hidden option option-best_game">
+            <label for="hours">Qualifying hours</label>
+            <select name="hours" id="hours" class="form-control hours-select">
+              <option value="0">Limited qualifying</option>
+              <option value="1">1 hour</option>
+              <option value="2">2 hours</option>
+              <option value="3">3 hours</option>
+              <option value="4">4 hours</option>
+              <option value="5">5 hours</option>
+              <option value="6">6 hours</option>
+              <option value="7">7 hours</option>
+              <option value="8">8 hours</option>
+              <option value="9">9 hours</option>
+              <option value="10">10 hours</option>
+              <option value="11">11 hours</option>
+              <option value="12">12 hours</option>
+              <option value="13">13 hours</option>
+              <option value="14">14 hours</option>
+              <option value="15">15 hours</option>
+              <option value="16">16 hours</option>
+              <option value="17">17 hours</option>
+              <option value="18">18 hours</option>
+              <option value="19">19 hours</option>
+              <option value="20">20+ hours</option>
+            </select>
+            <div class="help-block">If each player has more than one score from the same game used towards their standing, select how many above.</div>
+          </div>
+
           <div class="form-group option option-match_play option-knockout">
             <label for="group">Group size</label>
             <div class="radio">
@@ -319,6 +347,12 @@
       // Scores select
       $(document).delegate('.scores-select', 'change', function(e) {
         tournament.setScores(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+      // Hours select
+      $(document).delegate('.hours-select', 'change', function(e) {
+        tournament.setHours(parseInt($(e.target).val(), 10));
         updateTGP();
       });
 
