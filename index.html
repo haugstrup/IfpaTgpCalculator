@@ -72,7 +72,7 @@
   <body>
     <div class="wrapper">
       <h1>IFPA TGP Calculator (WPPR 5.2, 2016)</h1>
-      <div class="box bg-warning">A simple TGP calculator for <b>WPPR 5.2 (coming 2016)</b>. Based in <a href="http://www.ifpapinball.com/tgpguide2016">IFPA TGP Guide</a> and <a href="http://www.ifpapinball.com/menu/rankings-information-2016">WPPR 5.2</a>.</div>
+      <div class="box bg-warning">TGP calculator for <b>WPPR 5.2 (coming 2016)</b>. Based in <a href="http://www.ifpapinball.com/tgpguide2016">IFPA TGP Guide</a> and <a href="http://www.ifpapinball.com/menu/rankings-information-2016">WPPR 5.2</a>. Code is on <a href="https://github.com/haugstrup/IfpaTgpCalculator">GitHub</a>.</div>
       <div class="calculator-wrapper">
         <div class="calculator box">
           <div class="form-group">
@@ -261,16 +261,6 @@
     <script src="src/IfpaTgpTournament.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
-      var tournament = new IfpaTgpTournament();
-      tournament.setFormat('match_play');
-      tournament.setPlayersPerGame(2);
-      tournament.setRounds(1);
-      tournament.setGamesPerRound(1);
-      tournament.setStrikes(3);
-      tournament.setGames(1);
-      tournament.setScores(1);
-      tournament.setHours(0);
-
       var updateTGP = function() {
         var elmWrapper = $('.tgp-wrapper');
         var elmError = $('.tgp-error-wrapper');
@@ -288,6 +278,17 @@
           elmError.text(e).toggleClass('hidden', false);
         }
       }
+
+      var tournament = new IfpaTgpTournament();
+      tournament.setFormat('match_play');
+      tournament.setPlayersPerGame(2);
+      tournament.setRounds(1);
+      tournament.setGamesPerRound(1);
+      tournament.setStrikes(3);
+      tournament.setGames(1);
+      tournament.setScores(1);
+      tournament.setHours(0);
+      updateTGP();
 
       // Tournament toggle
       $(document).delegate('.format-select', 'change', function(e) {
