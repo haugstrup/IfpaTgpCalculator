@@ -20,6 +20,7 @@
       }
       footer {
         text-align:center;
+        padding-bottom:20px;
       }
       .calculator-wrapper {
         width:100%;
@@ -72,7 +73,7 @@
   <body>
     <div class="wrapper">
       <h1>IFPA TGP Calculator (WPPR 5.2, 2016)</h1>
-      <div class="box bg-warning">TGP calculator for <b>WPPR 5.2 (coming 2016)</b>. Based in <a href="http://www.ifpapinball.com/tgpguide2016">IFPA TGP Guide</a> and <a href="http://www.ifpapinball.com/menu/rankings-information-2016">WPPR 5.2</a>. Code is on <a href="https://github.com/haugstrup/IfpaTgpCalculator">GitHub</a>.</div>
+      <div class="box bg-warning">TGP calculator for <b>WPPR 5.2 (coming 2016)</b>. Based in <a href="http://www.ifpapinball.com/tgpguide2016">IFPA TGP Guide</a> and <a href="http://www.ifpapinball.com/menu/rankings-information-2016">WPPR 5.2</a>.</div>
       <div class="calculator-wrapper">
         <div class="calculator box">
           <div class="form-group">
@@ -99,6 +100,12 @@
               <label>
                 <input type="radio" name="format" class="format-select" value="best_game">
                 Best Game
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="format" class="format-select" value="group_bracket">
+                Group Bracket / PAPA Finals
               </label>
             </div>
             <div class="radio">
@@ -203,7 +210,7 @@
             </select>
           </div>
 
-          <div class="form-group option option-match_play option-knockout option-ladder">
+          <div class="form-group option option-match_play option-knockout option-ladder option-group_bracket">
             <label for="group">Group size</label>
             <div class="radio">
               <label>
@@ -248,7 +255,7 @@
             </select>
           </div>
 
-          <div class="form-group option option-match_play">
+          <div class="form-group option option-match_play option-group_bracket">
             <label for="games-per-round">Games per round</label>
             <select name="games-per-round" id="games-per-round" class="form-control games-per-round-select">
               <option value="1">1 game each round</option>
@@ -271,7 +278,7 @@
             </select>
           </div>
 
-          <div class="form-group hidden option option-knockout option-ladder">
+          <div class="form-group hidden option option-knockout option-ladder option-group_bracket">
             <label for="players">Number of players</label>
             <input type="number" class="form-control players-select">
           </div>
@@ -287,7 +294,7 @@
           <div class="form-group hidden tgp-error-wrapper box text-danger"></div>
         </div>
       </div>
-      <footer>Hosting provided by <a href="https://matchplay.events/">Match Play Events</a><br><a href="https://matchplay.events/">Run pinball tournaments on any device</a></footer>
+      <footer><p>Hosting provided by <a href="https://matchplay.events/">Match Play Events</a><br><a href="https://matchplay.events/">Run pinball tournaments on any device</a></p><p><a href="https://github.com/haugstrup/IfpaTgpCalculator">Code on GitHub</a></p></footer>
     </div>
 
 

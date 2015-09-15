@@ -118,6 +118,9 @@ describe('A tournament', function() {
 
     tournament.setFormat('ladder');
     expect(tournament.isDirect()).toBe(true);
+
+    tournament.setFormat('group_bracket');
+    expect(tournament.isDirect()).toBe(true);
   });
 
   it('provides indirect status', function() {
@@ -140,6 +143,9 @@ describe('A tournament', function() {
     expect(tournament.isIndirect()).toBe(false);
 
     tournament.setFormat('ladder');
+    expect(tournament.isIndirect()).toBe(false);
+
+    tournament.setFormat('group_bracket');
     expect(tournament.isIndirect()).toBe(false);
   });
 

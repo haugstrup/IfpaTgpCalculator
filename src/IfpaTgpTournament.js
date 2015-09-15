@@ -14,7 +14,7 @@ var IfpaTgpTournament = (function(exports){
       throw new Error("Tournament format not set");
     }
 
-    if (['match_play', 'single_elimination', 'double_elimination', 'knockout', 'ladder'].indexOf(this.format) !== -1) {
+    if (['match_play', 'single_elimination', 'double_elimination', 'knockout', 'ladder', 'group_bracket'].indexOf(this.format) !== -1) {
       return true;
     }
     return false;
@@ -86,6 +86,8 @@ var IfpaTgpTournament = (function(exports){
       meaningfulGames = this.getKnockoutMeaningfulGames();
     } else if (this.format === 'ladder') {
       meaningfulGames = this.getLadderMeaningfulGames();
+    } else if (this.format === 'group_bracket') {
+      meaningfulGames = this.getGroupBracketMeaningfulGames();
     }
 
     return meaningfulGames;
@@ -101,6 +103,55 @@ var IfpaTgpTournament = (function(exports){
     }
 
     return tgp > 100 ? 100 : tgp;
+  };
+
+  Tournament.prototype.getGroupBracketMeaningfulGames = function() {
+    if (!this.players || !this.playersPerGame || !this.gamesPerRound) {
+      return 0;
+    }
+
+    if (this.gamesPerRound !== 3 && this.gamesPerRound !== 4) {
+      throw new Error('Can only calculate group bracket tournaments with 3 or 4 games per round');
+    }
+
+    if (this.playersPerGame !== 4) {
+      throw new Error('Group bracket tournaments must be four-player groups');
+    }
+
+    // Throw error when player count is out of bounds
+    // bounds[gamesPerRound]
+    var bounds = {
+      3: [4, 91],
+      4: [4, 45]
+    };
+
+    if (this.players < bounds[this.gamesPerRound][0] || this.players > bounds[this.gamesPerRound][1]) {
+      throw new Error('You have too many or too few players players');
+    }
+
+    if (this.gamesPerRound === 3) {
+      if (this.players <= 5) {
+        return 6;
+      } else if (this.players <= 11) {
+        return 12;
+      } else if (this.players <= 22) {
+        return 18;
+      } else if (this.players <= 45) {
+        return 24;
+      } else if (this.players <= 91) {
+        return 30;
+      }
+    } else if (this.gamesPerRound === 4) {
+      if (this.players <= 5) {
+        return 8;
+      } else if (this.players <= 11) {
+        return 16;
+      } else if (this.players <= 22) {
+        return 24;
+      } else if (this.players <= 45) {
+        return 32;
+      }
+    }
   };
 
   Tournament.prototype.getLadderMeaningfulGames = function() {
