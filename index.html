@@ -98,6 +98,12 @@
             </div>
             <div class="radio">
               <label>
+                <input type="radio" name="format" class="format-select" value="double_elimination">
+                Double elimination bracket
+              </label>
+            </div>
+            <div class="radio">
+              <label>
                 <input type="radio" name="format" class="format-select" value="pingolf">
                 Pingolf
               </label>
@@ -284,9 +290,25 @@
             </select>
           </div>
 
-          <div class="form-group hidden option option-knockout option-ladder option-group_bracket option-single_elimination">
+          <div class="form-group hidden option option-double_elimination">
+            <label for="best-of-double">Games per round</label>
+            <select name="best-of-double" id="best-of-double" class="form-control best-of-double-select">
+              <option value="1:1">Winner's bracket: Best of 1; Loser's bracket: Best of 1</option>
+              <option value="3:1">Winner's bracket: Best of 3; Loser's bracket: Best of 1</option>
+              <option value="3:3">Winner's bracket: Best of 3; Loser's bracket: Best of 3</option>
+              <option value="5:1">Winner's bracket: Best of 5; Loser's bracket: Best of 1</option>
+              <option value="5:3">Winner's bracket: Best of 5; Loser's bracket: Best of 3</option>
+              <option value="5:5">Winner's bracket: Best of 5; Loser's bracket: Best of 5</option>
+              <option value="7:1">Winner's bracket: Best of 7; Loser's bracket: Best of 1</option>
+              <option value="7:3">Winner's bracket: Best of 7; Loser's bracket: Best of 3</option>
+              <option value="7:5">Winner's bracket: Best of 7; Loser's bracket: Best of 5</option>
+              <option value="7:7">Winner's bracket: Best of 7; Loser's bracket: Best of 7</option>
+            </select>
+          </div>
+
+          <div class="form-group hidden option option-knockout option-ladder option-group_bracket option-single_elimination option-double_elimination">
             <label for="players">Number of players</label>
-            <input type="number" class="form-control players-select">
+            <input type="number" class="form-control players-select" value="8">
           </div>
         </div>
         <div class="results">
@@ -331,10 +353,12 @@
       tournament.setPlayersPerGame(2);
       tournament.setRounds(1);
       tournament.setGamesPerRound(1);
+      tournament.setDoubleEliminationGamesPerRound('1:1');
       tournament.setStrikes(3);
       tournament.setGames(1);
       tournament.setScores(1);
       tournament.setHours(0);
+      tournament.setPlayers(8);
       updateTGP();
 
       // Tournament toggle
@@ -396,6 +420,11 @@
       $(document).delegate('.best-of-select', 'change', function(e) {
         $('.games-per-round-select').val($(e.target).val());
         tournament.setGamesPerRound(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+      $(document).delegate('.best-of-double-select', 'change', function(e) {
+        tournament.setDoubleEliminationGamesPerRound($(e.target).val());
         updateTGP();
       });
 
