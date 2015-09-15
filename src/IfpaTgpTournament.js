@@ -84,6 +84,8 @@ var IfpaTgpTournament = (function(exports){
       }
     } else if (this.format === 'knockout') {
       meaningfulGames = this.getKnockoutMeaningfulGames();
+    } else if (this.format === 'ladder') {
+      meaningfulGames = this.getLadderMeaningfulGames();
     }
 
     return meaningfulGames;
@@ -99,6 +101,51 @@ var IfpaTgpTournament = (function(exports){
     }
 
     return tgp > 100 ? 100 : tgp;
+  };
+
+  Tournament.prototype.getLadderMeaningfulGames = function() {
+    if (!this.players || !this.playersPerGame) {
+      return 0;
+    }
+
+    if (this.playersPerGame === 2) {
+      throw new Error('Ladder tournaments cannot be head-to-head');
+    }
+
+    // Throw error when player count is out of bounds
+    // bounds[playersPerGame]
+    var bounds = {
+      3: [4, 453],
+      4: [4, 271]
+    };
+
+    if (this.players < bounds[this.playersPerGame][0] || this.players > bounds[this.playersPerGame][1]) {
+      throw new Error('You have too many or too few players players');
+    }
+
+    if (this.playersPerGame === 4) {
+      if (this.players <= 4) {
+        return 2;
+      } else if (this.players <= 5) {
+        return 3;
+      } else if (this.players <= 6) {
+        return 5;
+      } else if (this.players <= 12) {
+        return 6;
+      } else if (this.players <= 44) {
+        return 7;
+      } else if (this.players <= 271) {
+        return 8;
+      }
+    } else if (this.playersPerGame === 3) {
+      if (this.players <= 10) {
+        return 2;
+      } else if (this.players <= 453) {
+        return 3;
+      }
+    }
+
+
   };
 
   Tournament.prototype.getKnockoutMeaningfulGames = function() {
