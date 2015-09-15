@@ -88,6 +88,8 @@ var IfpaTgpTournament = (function(exports){
       meaningfulGames = this.getLadderMeaningfulGames();
     } else if (this.format === 'group_bracket') {
       meaningfulGames = this.getGroupBracketMeaningfulGames();
+    } else if (this.format === 'single_elimination') {
+      meaningfulGames = this.getSingleEliminationMeaningfulGames();
     }
 
     return meaningfulGames;
@@ -105,17 +107,95 @@ var IfpaTgpTournament = (function(exports){
     return tgp > 100 ? 100 : tgp;
   };
 
+  Tournament.prototype.getSingleEliminationMeaningfulGames = function() {
+    if (!this.players || !this.gamesPerRound) {
+      return 0;
+    }
+
+    if ([1, 3, 5, 7].indexOf(this.gamesPerRound) === -1) {
+      throw new Error('Can only calculate single elimination tournaments that are Best Of 1, 3, 5 or 7 games');
+    }
+
+    // Throw error when player count is out of bounds
+    // bounds[gamesPerRound]
+    var bounds = {
+      1: [4, 367],
+      3: [4, 367],
+      5: [4, 183],
+      7: [4, 45]
+    };
+
+    if (this.players < bounds[this.gamesPerRound][0] || this.players > bounds[this.gamesPerRound][1]) {
+      throw new Error('You have too many or too few players players');
+    }
+
+    if (this.gamesPerRound === 1) {
+      if (this.players <= 5) {
+        return 2;
+      } else if (this.players <= 11) {
+        return 3;
+      } else if (this.players <= 22) {
+        return 4;
+      } else if (this.players <= 45) {
+        return 5;
+      } else if (this.players <= 91) {
+        return 6;
+      } else if (this.players <= 183) {
+        return 7;
+      } else if (this.players <= 367) {
+        return 8;
+      }
+    } else if (this.gamesPerRound === 3) {
+      if (this.players <= 5) {
+        return 5;
+      } else if (this.players <= 11) {
+        return 8;
+      } else if (this.players <= 22) {
+        return 10;
+      } else if (this.players <= 45) {
+        return 13;
+      } else if (this.players <= 91) {
+        return 15;
+      } else if (this.players <= 183) {
+        return 18;
+      } else if (this.players <= 367) {
+        return 20;
+      }
+    } else if (this.gamesPerRound === 5) {
+      if (this.players <= 5) {
+        return 8;
+      } else if (this.players <= 11) {
+        return 12;
+      } else if (this.players <= 22) {
+        return 16;
+      } else if (this.players <= 45) {
+        return 20;
+      } else if (this.players <= 91) {
+        return 24;
+      } else if (this.players <= 183) {
+        return 28;
+      }
+    } else if (this.gamesPerRound === 7) {
+      if (this.players <= 5) {
+        return 11;
+      } else if (this.players <= 11) {
+        return 17;
+      } else if (this.players <= 22) {
+        return 22;
+      } else if (this.players <= 45) {
+        return 28;
+      }
+    }
+
+  };
+
   Tournament.prototype.getGroupBracketMeaningfulGames = function() {
-    if (!this.players || !this.playersPerGame || !this.gamesPerRound) {
+    if (!this.players || !this.gamesPerRound) {
       return 0;
     }
 
     if (this.gamesPerRound !== 3 && this.gamesPerRound !== 4) {
       throw new Error('Can only calculate group bracket tournaments with 3 or 4 games per round');
-    }
-
-    if (this.playersPerGame !== 4) {
-      throw new Error('Group bracket tournaments must be four-player groups');
     }
 
     // Throw error when player count is out of bounds

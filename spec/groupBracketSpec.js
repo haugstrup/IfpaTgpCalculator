@@ -11,7 +11,7 @@ describe('A Group Bracket tournament', function() {
   it('provides meaningful games with not all settings set', function() {
     expect(tournament.getMeaningfulGames()).toBe(0);
 
-    tournament.setPlayersPerGame(4);
+    tournament.setGamesPerRound(4);
     expect(tournament.getMeaningfulGames()).toBe(0);
   });
 
@@ -19,7 +19,6 @@ describe('A Group Bracket tournament', function() {
     var foo = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('group_bracket');
-      tournament.setPlayersPerGame(3);
       tournament.setPlayers(16);
       tournament.setGamesPerRound(1);
       tournament.getMeaningfulGames();
@@ -27,24 +26,11 @@ describe('A Group Bracket tournament', function() {
     expect(foo).toThrowError('Can only calculate group bracket tournaments with 3 or 4 games per round');
   });
 
-  it('throws error with players per game is not four', function() {
-    var foo = function() {
-      tournament = new IfpaTgpTournament();
-      tournament.setFormat('group_bracket');
-      tournament.setPlayersPerGame(3);
-      tournament.setPlayers(16);
-      tournament.setGamesPerRound(3);
-      tournament.getMeaningfulGames();
-    };
-    expect(foo).toThrowError('Group bracket tournaments must be four-player groups');
-  });
-
   it('throws error if player count is out of bounds', function() {
     // 3 game rounds
     var firstTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('group_bracket');
-      tournament.setPlayersPerGame(4);
       tournament.setPlayers(92);
       tournament.setGamesPerRound(3);
       tournament.getMeaningfulGames();
@@ -54,7 +40,6 @@ describe('A Group Bracket tournament', function() {
     var firstTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('group_bracket');
-      tournament.setPlayersPerGame(4);
       tournament.setPlayers(3);
       tournament.setGamesPerRound(3);
       tournament.getMeaningfulGames();
@@ -65,7 +50,6 @@ describe('A Group Bracket tournament', function() {
     var secondTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('group_bracket');
-      tournament.setPlayersPerGame(4);
       tournament.setPlayers(46);
       tournament.setGamesPerRound(4);
       tournament.getMeaningfulGames();
@@ -75,7 +59,6 @@ describe('A Group Bracket tournament', function() {
     var secondTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('group_bracket');
-      tournament.setPlayersPerGame(4);
       tournament.setPlayers(3);
       tournament.setGamesPerRound(4);
       tournament.getMeaningfulGames();
@@ -84,7 +67,6 @@ describe('A Group Bracket tournament', function() {
   });
 
   it('provides meaningful games for 3 game rounds', function() {
-    tournament.setPlayersPerGame(4);
     tournament.setGamesPerRound(3);
 
     tournament.setPlayers(5);
@@ -104,7 +86,6 @@ describe('A Group Bracket tournament', function() {
   });
 
   it('provides meaningful games for 4 game rounds', function() {
-    tournament.setPlayersPerGame(4);
     tournament.setGamesPerRound(4);
 
     tournament.setPlayers(5);

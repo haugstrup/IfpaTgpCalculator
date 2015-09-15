@@ -92,6 +92,12 @@
             </div>
             <div class="radio">
               <label>
+                <input type="radio" name="format" class="format-select" value="single_elimination">
+                Single elimination bracket
+              </label>
+            </div>
+            <div class="radio">
+              <label>
                 <input type="radio" name="format" class="format-select" value="pingolf">
                 Pingolf
               </label>
@@ -210,7 +216,7 @@
             </select>
           </div>
 
-          <div class="form-group option option-match_play option-knockout option-ladder option-group_bracket">
+          <div class="form-group option option-match_play option-knockout option-ladder">
             <label for="group">Group size</label>
             <div class="radio">
               <label>
@@ -268,7 +274,7 @@
             </select>
           </div>
 
-          <div class="form-group hidden option option-knockout">
+          <div class="form-group hidden option option-knockout option-single_elimination">
             <label for="best-of">Games per round</label>
             <select name="best-of" id="best-of" class="form-control best-of-select">
               <option value="1">Best of 1 game per round</option>
@@ -278,7 +284,7 @@
             </select>
           </div>
 
-          <div class="form-group hidden option option-knockout option-ladder option-group_bracket">
+          <div class="form-group hidden option option-knockout option-ladder option-group_bracket option-single_elimination">
             <label for="players">Number of players</label>
             <input type="number" class="form-control players-select">
           </div>
