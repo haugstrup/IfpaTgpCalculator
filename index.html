@@ -291,7 +291,7 @@
           <div class="form-group hidden tgp-direct-notice text-danger small box">
             This tournament will <b>only</b> be endorsed for WPPRs if you include a finals/playoffs component that involves <b>direct play</b> where at least <b>10%</b> but no more than <b>50%</b> of players participate.
           </div>
-          <div class="form-group hidden tgp-error-wrapper box text-danger"></div>
+          <div class="form-group hidden tgp-error-wrapper box"><div class="error text-danger"></div><hr>This calculator has certain limitations. This does not mean your tournament will not be endorsed for WPPRs. Please direct any questions directly to the <a href="http://www.ifpapinball.com/menu/about/send-us-a-comment">IFPA</a>.</div>
         </div>
       </div>
       <footer><p>Hosting provided by <a href="https://matchplay.events/">Match Play Events</a><br><a href="https://matchplay.events/">Run pinball tournaments on any device</a></p><p><a href="https://github.com/haugstrup/IfpaTgpCalculator">Code on GitHub</a></p></footer>
@@ -315,7 +315,8 @@
         } catch (e) {
           elmWrapper.toggleClass('hidden', true);
           elmNotice.toggleClass('hidden', true);
-          elmError.text(e).toggleClass('hidden', false);
+          elmError.find('.error').text(e);
+          elmError.toggleClass('hidden', false);
         }
       }
 
@@ -382,10 +383,12 @@
 
       // Games per round select
       $(document).delegate('.games-per-round-select', 'change', function(e) {
+        $('.best-of-select').val($(e.target).val());
         tournament.setGamesPerRound(parseInt($(e.target).val(), 10));
         updateTGP();
       });
       $(document).delegate('.best-of-select', 'change', function(e) {
+        $('.games-per-round-select').val($(e.target).val());
         tournament.setGamesPerRound(parseInt($(e.target).val(), 10));
         updateTGP();
       });
