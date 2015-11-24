@@ -260,10 +260,10 @@ var IfpaTgpTournament = (function(exports){
     // Throw error when player count is out of bounds
     // bounds[gamesPerRound]
     var bounds = {
-      1: [4, 367],
-      3: [4, 367],
-      5: [4, 183],
-      7: [4, 45]
+      1: [4, 350],
+      3: [4, 294],
+      5: [4, 82],
+      7: [4, 24]
     };
 
     if (this.players < bounds[this.gamesPerRound][0] || this.players > bounds[this.gamesPerRound][1]) {
@@ -281,50 +281,110 @@ var IfpaTgpTournament = (function(exports){
         return 5;
       } else if (this.players <= 91) {
         return 6;
-      } else if (this.players <= 183) {
+      } else if (this.players <= 189) {
         return 7;
-      } else if (this.players <= 367) {
+      } else if (this.players <= 350) {
         return 8;
       }
     } else if (this.gamesPerRound === 3) {
-      if (this.players <= 5) {
+      if (this.players <= 4) {
         return 5;
-      } else if (this.players <= 11) {
+      } else if (this.players <= 6) {
+        return 6;
+      } else if (this.players <= 7) {
+        return 7;
+      } else if (this.players <= 10) {
         return 8;
-      } else if (this.players <= 22) {
+      } else if (this.players <= 13) {
+        return 9;
+      } else if (this.players <= 18) {
         return 10;
-      } else if (this.players <= 45) {
+      } else if (this.players <= 24) {
+        return 11;
+      } else if (this.players <= 31) {
+        return 12;
+      } else if (this.players <= 42) {
         return 13;
-      } else if (this.players <= 91) {
+      } else if (this.players <= 55) {
+        return 14;
+      } else if (this.players <= 73) {
         return 15;
-      } else if (this.players <= 183) {
+      } else if (this.players <= 97) {
+        return 16;
+      } else if (this.players <= 127) {
+        return 17;
+      } else if (this.players <= 168) {
         return 18;
-      } else if (this.players <= 367) {
+      } else if (this.players <= 222) {
+        return 19;
+      } else if (this.players <= 294) {
         return 20;
       }
     } else if (this.gamesPerRound === 5) {
-      if (this.players <= 5) {
+      if (this.players <= 4) {
         return 8;
-      } else if (this.players <= 11) {
+      } else if (this.players <= 5) {
+        return 9;
+      } else if (this.players <= 6) {
+        return 10;
+      } else if (this.players <= 7) {
+        return 11;
+      } else if (this.players <= 8) {
         return 12;
-      } else if (this.players <= 22) {
+      } else if (this.players <= 10) {
+        return 13;
+      } else if (this.players <= 12) {
+        return 14;
+      } else if (this.players <= 14) {
+        return 15;
+      } else if (this.players <= 17) {
         return 16;
-      } else if (this.players <= 45) {
+      } else if (this.players <= 20) {
+        return 17;
+      } else if (this.players <= 24) {
+        return 18;
+      } else if (this.players <= 29) {
+        return 19;
+      } else if (this.players <= 34) {
         return 20;
-      } else if (this.players <= 91) {
+      } else if (this.players <= 41) {
+        return 21;
+      } else if (this.players <= 49) {
+        return 22;
+      } else if (this.players <= 58) {
+        return 23;
+      } else if (this.players <= 69) {
         return 24;
-      } else if (this.players <= 183) {
-        return 28;
+      } else if (this.players <= 82) {
+        return 25;
       }
     } else if (this.gamesPerRound === 7) {
-      if (this.players <= 5) {
+      if (this.players <= 4) {
         return 11;
-      } else if (this.players <= 11) {
+      } else if (this.players <= 5) {
+        return 13;
+      } else if (this.players <= 6) {
+        return 14;
+      } else if (this.players <= 7) {
+        return 15;
+      } else if (this.players <= 9) {
         return 17;
-      } else if (this.players <= 22) {
+      } else if (this.players <= 10) {
+        return 18;
+      } else if (this.players <= 11) {
+        return 19;
+      } else if (this.players <= 13) {
+        return 20;
+      } else if (this.players <= 15) {
+        return 21;
+      } else if (this.players <= 17) {
         return 22;
-      } else if (this.players <= 45) {
-        return 28;
+      } else if (this.players <= 19) {
+        return 23;
+      } else if (this.players <= 21) {
+        return 24;
+      } else if (this.players <= 24) {
+        return 25;
       }
     }
 
