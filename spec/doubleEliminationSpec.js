@@ -44,7 +44,7 @@ describe('A Double Elimination tournament', function() {
     var secondTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('double_elimination');
-      tournament.setPlayers(512);
+      tournament.setPlayers(609);
       tournament.setDoubleEliminationGamesPerRound('3:1');
       tournament.getMeaningfulGames();
     };
@@ -63,7 +63,7 @@ describe('A Double Elimination tournament', function() {
     var thirdTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('double_elimination');
-      tournament.setPlayers(512);
+      tournament.setPlayers(208);
       tournament.setDoubleEliminationGamesPerRound('3:3');
       tournament.getMeaningfulGames();
     };
@@ -82,7 +82,7 @@ describe('A Double Elimination tournament', function() {
     var fourthTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('double_elimination');
-      tournament.setPlayers(128);
+      tournament.setPlayers(725);
       tournament.setDoubleEliminationGamesPerRound('5:1');
       tournament.getMeaningfulGames();
     };
@@ -101,7 +101,7 @@ describe('A Double Elimination tournament', function() {
     var fifthTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('double_elimination');
-      tournament.setPlayers(64);
+      tournament.setPlayers(74);
       tournament.setDoubleEliminationGamesPerRound('5:3');
       tournament.getMeaningfulGames();
     };
@@ -120,7 +120,7 @@ describe('A Double Elimination tournament', function() {
     var sixthTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('double_elimination');
-      tournament.setPlayers(32);
+      tournament.setPlayers(15);
       tournament.setDoubleEliminationGamesPerRound('5:5');
       tournament.getMeaningfulGames();
     };
@@ -139,7 +139,7 @@ describe('A Double Elimination tournament', function() {
     var seventhTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('double_elimination');
-      tournament.setPlayers(64);
+      tournament.setPlayers(431);
       tournament.setDoubleEliminationGamesPerRound('7:1');
       tournament.getMeaningfulGames();
     };
@@ -158,7 +158,7 @@ describe('A Double Elimination tournament', function() {
     var eighthTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('double_elimination');
-      tournament.setPlayers(32);
+      tournament.setPlayers(24);
       tournament.setDoubleEliminationGamesPerRound('7:3');
       tournament.getMeaningfulGames();
     };
@@ -177,7 +177,7 @@ describe('A Double Elimination tournament', function() {
     var ninthTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('double_elimination');
-      tournament.setPlayers(16);
+      tournament.setPlayers(8);
       tournament.setDoubleEliminationGamesPerRound('7:5');
       tournament.getMeaningfulGames();
     };
@@ -196,7 +196,7 @@ describe('A Double Elimination tournament', function() {
     var tenthTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('double_elimination');
-      tournament.setPlayers(16);
+      tournament.setPlayers(5);
       tournament.setDoubleEliminationGamesPerRound('7:7');
       tournament.getMeaningfulGames();
     };
@@ -240,148 +240,247 @@ describe('A Double Elimination tournament', function() {
   it('provides meaningful games for best of 3:1', function() {
     tournament.setDoubleEliminationGamesPerRound('3:1');
 
-    tournament.setPlayers(7);
+    tournament.setPlayers(4);
     expect(tournament.getMeaningfulGames()).toBe(8);
 
-    tournament.setPlayers(15);
+    tournament.setPlayers(9);
+    expect(tournament.getMeaningfulGames()).toBe(9);
+
+    tournament.setPlayers(19);
+    expect(tournament.getMeaningfulGames()).toBe(10);
+
+    tournament.setPlayers(38);
     expect(tournament.getMeaningfulGames()).toBe(11);
 
-    tournament.setPlayers(31);
+    tournament.setPlayers(76);
+    expect(tournament.getMeaningfulGames()).toBe(12);
+
+    tournament.setPlayers(152);
     expect(tournament.getMeaningfulGames()).toBe(13);
 
-    tournament.setPlayers(63);
-    expect(tournament.getMeaningfulGames()).toBe(16);
+    tournament.setPlayers(304);
+    expect(tournament.getMeaningfulGames()).toBe(14);
 
-    tournament.setPlayers(127);
-    expect(tournament.getMeaningfulGames()).toBe(18);
-
-    tournament.setPlayers(255);
-    expect(tournament.getMeaningfulGames()).toBe(21);
-
-    tournament.setPlayers(511);
-    expect(tournament.getMeaningfulGames()).toBe(23);
+    tournament.setPlayers(608);
+    expect(tournament.getMeaningfulGames()).toBe(15);
   });
 
   it('provides meaningful games for best of 3:3', function() {
     tournament.setDoubleEliminationGamesPerRound('3:3');
 
+    tournament.setPlayers(4);
+    expect(tournament.getMeaningfulGames()).toBe(11);
+
+    tournament.setPlayers(5);
+    expect(tournament.getMeaningfulGames()).toBe(12);
+
     tournament.setPlayers(7);
     expect(tournament.getMeaningfulGames()).toBe(13);
 
-    tournament.setPlayers(15);
+    tournament.setPlayers(9);
+    expect(tournament.getMeaningfulGames()).toBe(14);
+
+    tournament.setPlayers(12);
     expect(tournament.getMeaningfulGames()).toBe(15);
 
-    tournament.setPlayers(31);
+    tournament.setPlayers(17);
+    expect(tournament.getMeaningfulGames()).toBe(16);
+
+    tournament.setPlayers(22);
+    expect(tournament.getMeaningfulGames()).toBe(17);
+
+    tournament.setPlayers(29);
     expect(tournament.getMeaningfulGames()).toBe(18);
 
-    tournament.setPlayers(63);
+    tournament.setPlayers(39);
+    expect(tournament.getMeaningfulGames()).toBe(19);
+
+    tournament.setPlayers(51);
     expect(tournament.getMeaningfulGames()).toBe(20);
 
-    tournament.setPlayers(127);
+    tournament.setPlayers(68);
+    expect(tournament.getMeaningfulGames()).toBe(21);
+
+    tournament.setPlayers(90);
+    expect(tournament.getMeaningfulGames()).toBe(22);
+
+    tournament.setPlayers(119);
     expect(tournament.getMeaningfulGames()).toBe(23);
 
-    tournament.setPlayers(255);
-    expect(tournament.getMeaningfulGames()).toBe(25);
+    tournament.setPlayers(157);
+    expect(tournament.getMeaningfulGames()).toBe(24);
 
-    tournament.setPlayers(511);
-    expect(tournament.getMeaningfulGames()).toBe(28);
+    tournament.setPlayers(207);
+    expect(tournament.getMeaningfulGames()).toBe(25);
   });
 
   it('provides meaningful games for best of 5:1', function() {
     tournament.setDoubleEliminationGamesPerRound('5:1');
 
-    tournament.setPlayers(7);
-    expect(tournament.getMeaningfulGames()).toBe(11);
+    tournament.setPlayers(5);
+    expect(tournament.getMeaningfulGames()).toBe(12);
 
-    tournament.setPlayers(15);
+    tournament.setPlayers(11);
+    expect(tournament.getMeaningfulGames()).toBe(13);
+
+    tournament.setPlayers(22);
+    expect(tournament.getMeaningfulGames()).toBe(14);
+
+    tournament.setPlayers(45);
     expect(tournament.getMeaningfulGames()).toBe(15);
 
-    tournament.setPlayers(31);
+    tournament.setPlayers(90);
+    expect(tournament.getMeaningfulGames()).toBe(16);
+
+    tournament.setPlayers(181);
+    expect(tournament.getMeaningfulGames()).toBe(17);
+
+    tournament.setPlayers(362);
+    expect(tournament.getMeaningfulGames()).toBe(18);
+
+    tournament.setPlayers(724);
     expect(tournament.getMeaningfulGames()).toBe(19);
 
-    tournament.setPlayers(63);
-    expect(tournament.getMeaningfulGames()).toBe(23);
-
-    tournament.setPlayers(127);
-    expect(tournament.getMeaningfulGames()).toBe(27);
   });
 
   it('provides meaningful games for best of 5:3', function() {
     tournament.setDoubleEliminationGamesPerRound('5:3');
 
-    tournament.setPlayers(7);
+    tournament.setPlayers(4);
+    expect(tournament.getMeaningfulGames()).toBe(15);
+
+    tournament.setPlayers(6);
     expect(tournament.getMeaningfulGames()).toBe(16);
 
-    tournament.setPlayers(15);
+    tournament.setPlayers(7);
+    expect(tournament.getMeaningfulGames()).toBe(17);
+
+    tournament.setPlayers(10);
+    expect(tournament.getMeaningfulGames()).toBe(18);
+
+    tournament.setPlayers(13);
+    expect(tournament.getMeaningfulGames()).toBe(19);
+
+    tournament.setPlayers(18);
     expect(tournament.getMeaningfulGames()).toBe(20);
 
+    tournament.setPlayers(24);
+    expect(tournament.getMeaningfulGames()).toBe(21);
+
     tournament.setPlayers(31);
+    expect(tournament.getMeaningfulGames()).toBe(22);
+
+    tournament.setPlayers(42);
+    expect(tournament.getMeaningfulGames()).toBe(23);
+
+    tournament.setPlayers(55);
     expect(tournament.getMeaningfulGames()).toBe(24);
 
-    tournament.setPlayers(63);
-    expect(tournament.getMeaningfulGames()).toBe(28);
+    tournament.setPlayers(73);
+    expect(tournament.getMeaningfulGames()).toBe(25);
+
   });
 
   it('provides meaningful games for best of 5:5', function() {
     tournament.setDoubleEliminationGamesPerRound('5:5');
 
-    tournament.setPlayers(7);
+    tournament.setPlayers(4);
+    expect(tournament.getMeaningfulGames()).toBe(18);
+
+    tournament.setPlayers(5);
+    expect(tournament.getMeaningfulGames()).toBe(19);
+
+    tournament.setPlayers(6);
     expect(tournament.getMeaningfulGames()).toBe(20);
 
-    tournament.setPlayers(15);
+    tournament.setPlayers(7);
+    expect(tournament.getMeaningfulGames()).toBe(21);
+
+    tournament.setPlayers(8);
+    expect(tournament.getMeaningfulGames()).toBe(22);
+
+    tournament.setPlayers(10);
+    expect(tournament.getMeaningfulGames()).toBe(23);
+
+    tournament.setPlayers(12);
     expect(tournament.getMeaningfulGames()).toBe(24);
 
-    tournament.setPlayers(31);
-    expect(tournament.getMeaningfulGames()).toBe(28);
+    tournament.setPlayers(14);
+    expect(tournament.getMeaningfulGames()).toBe(25);
   });
 
   it('provides meaningful games for best of 7:1', function() {
     tournament.setDoubleEliminationGamesPerRound('7:1');
 
-    tournament.setPlayers(7);
-    expect(tournament.getMeaningfulGames()).toBe(14);
+    tournament.setPlayers(6);
+    expect(tournament.getMeaningfulGames()).toBe(16);
 
-    tournament.setPlayers(15);
+    tournament.setPlayers(13);
+    expect(tournament.getMeaningfulGames()).toBe(17);
+
+    tournament.setPlayers(26);
+    expect(tournament.getMeaningfulGames()).toBe(18);
+
+    tournament.setPlayers(53);
+    expect(tournament.getMeaningfulGames()).toBe(19);
+
+    tournament.setPlayers(107);
     expect(tournament.getMeaningfulGames()).toBe(20);
 
-    tournament.setPlayers(31);
-    expect(tournament.getMeaningfulGames()).toBe(25);
+    tournament.setPlayers(215);
+    expect(tournament.getMeaningfulGames()).toBe(21);
 
-    tournament.setPlayers(63);
-    expect(tournament.getMeaningfulGames()).toBe(31);
+    tournament.setPlayers(430);
+    expect(tournament.getMeaningfulGames()).toBe(22);
   });
 
   it('provides meaningful games for best of 7:3', function() {
     tournament.setDoubleEliminationGamesPerRound('7:3');
 
-    tournament.setPlayers(7);
+    tournament.setPlayers(4);
     expect(tournament.getMeaningfulGames()).toBe(19);
 
-    tournament.setPlayers(15);
+    tournament.setPlayers(6);
+    expect(tournament.getMeaningfulGames()).toBe(20);
+
+    tournament.setPlayers(8);
+    expect(tournament.getMeaningfulGames()).toBe(21);
+
+    tournament.setPlayers(11);
+    expect(tournament.getMeaningfulGames()).toBe(22);
+
+    tournament.setPlayers(14);
+    expect(tournament.getMeaningfulGames()).toBe(23);
+
+    tournament.setPlayers(19);
     expect(tournament.getMeaningfulGames()).toBe(24);
 
-    tournament.setPlayers(31);
-    expect(tournament.getMeaningfulGames()).toBe(30);
+    tournament.setPlayers(23);
+    expect(tournament.getMeaningfulGames()).toBe(25);
   });
 
   it('provides meaningful games for best of 7:5', function() {
     tournament.setDoubleEliminationGamesPerRound('7:5');
 
-    tournament.setPlayers(7);
+    tournament.setPlayers(4);
+    expect(tournament.getMeaningfulGames()).toBe(22);
+
+    tournament.setPlayers(5);
     expect(tournament.getMeaningfulGames()).toBe(23);
 
-    tournament.setPlayers(15);
-    expect(tournament.getMeaningfulGames()).toBe(29);
+    tournament.setPlayers(6);
+    expect(tournament.getMeaningfulGames()).toBe(24);
+
+    tournament.setPlayers(7);
+    expect(tournament.getMeaningfulGames()).toBe(25);
   });
 
   it('provides meaningful games for best of 7:7', function() {
     tournament.setDoubleEliminationGamesPerRound('7:7');
 
-    tournament.setPlayers(7);
-    expect(tournament.getMeaningfulGames()).toBe(28);
+    tournament.setPlayers(4);
+    expect(tournament.getMeaningfulGames()).toBe(25);
 
-    tournament.setPlayers(15);
-    expect(tournament.getMeaningfulGames()).toBe(33);
   });
 
 });
