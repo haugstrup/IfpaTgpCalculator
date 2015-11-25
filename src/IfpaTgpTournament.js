@@ -66,6 +66,10 @@ var IfpaTgpTournament = (function(exports){
     this.strikes = strikes;
   };
 
+  Tournament.prototype.setEliminationCount = function(count) {
+    this.eliminated = count;
+  };
+
   Tournament.prototype.setDoubleEliminationGamesPerRound = function(doubleEliminationGamesPerRound) {
     this.doubleEliminationGamesPerRound = doubleEliminationGamesPerRound;
   };
@@ -549,120 +553,211 @@ var IfpaTgpTournament = (function(exports){
       return 0;
     }
 
-    if (this.playersPerGame > 3) {
-      throw new Error('Can only calculate TGP for knockout tournaments with head-to-head or three-player groups');
-    }
-
     if (this.playersPerGame > 2 && this.gamesPerRound > 1) {
       throw new Error('Best-of-X is only supported for head-to-head tournaments');
     }
 
+    if (this.eliminated >= this.playersPerGame) {
+      throw new Error('You cannot give all players a strike');
+    }
+
     // Throw error when player count is out of bounds
-    // bounds[strikes][playersPerGame][gamesPerRound]
+    // bounds[strikes][playersPerGame][gamesPerRound][strikesPerGame]
     var bounds = {
+      // Two strikes
       2: {
+        // Head-to-head
         2: {
-          1: [2, 255],
-          3: [2, 127],
-          5: [2, 14],
-          7: [2, 7]
+          // Best-of-1
+          1: {1: [2, 127]},
+          // Best-of-3
+          3: {1: [4, 63]},
+          // Best-of-5
+          5: {1: [4, 8]},
+          // Best-of-7
+          7: {1: [4, 4]}
         },
+        // Three-player groups
         3: {
-          1: [6, 512]
+          // Best-of-1
+          1: {1: [6, 140], 2: [6, 512]}
+        },
+        // Four-player groups
+        4: {
+          // Best-of-1
+          1: {1: [8, 15], 2: [8, 256], 3: [8, 511]}
         }
       },
       3: {
         2: {
-          1: [4, 254],
-          3: [4, 31],
-          5: [4, 5],
-          7: [4, 5]
+          1: {1: [4, 254]},
+          3: {1: [4, 31]},
+          5: {1: [4, 5]},
+          7: {1: [4, 5]}
         },
         3: {
-          1: [6, 512]
+          1: {2: [6, 512]}
         }
       },
       4: {
         2: {
-          1: [4, 452],
-          3: [4, 14],
-          5: [4, 5],
-          7: [4, 5]
+          1: {1: [4, 452]},
+          3: {1: [4, 14]},
+          5: {1: [4, 5]},
+          7: {1: [4, 5]}
         },
         3: {
-          1: [6, 512]
+          1: {2: [6, 512]}
         }
       }
     };
 
-    if (this.players < bounds[this.strikes][this.playersPerGame][this.gamesPerRound][0] || this.players > bounds[this.strikes][this.playersPerGame][this.gamesPerRound][1]) {
+    if (this.players < bounds[this.strikes][this.playersPerGame][this.gamesPerRound][this.eliminated][0] || this.players > bounds[this.strikes][this.playersPerGame][this.gamesPerRound][this.eliminated][1]) {
       throw new Error('You have too many or too few players players');
     }
 
     if (this.strikes === 2) {
       if (this.playersPerGame === 2) {
-        if (this.gamesPerRound === 1) {
-          if (this.players <= 4) {
-            return 5;
-          } else if (this.players <= 7) {
-            return 6;
-          } else if (this.players <= 14) {
-            return 7;
-          } else if (this.players <= 23) {
-            return 8;
-          } else if (this.players <= 39) {
-            return 9;
-          } else if (this.players <= 63) {
-            return 10;
-          } else if (this.players <= 127) {
-            return 11;
-          } else if (this.players <= 255) {
-            return 12;
-          }
-        } else if (this.gamesPerRound === 3) {
-          if (this.players <= 4) {
-            return 13;
-          } else if (this.players <= 7) {
-            return 15;
-          } else if (this.players <= 14) {
-            return 18;
-          } else if (this.players <= 23) {
-            return 20;
-          } else if (this.players <= 39) {
-            return 23;
-          } else if (this.players <= 63) {
-            return 25;
-          } else if (this.players <= 127) {
-            return 28;
-          }
-        } else if (this.gamesPerRound === 5) {
-          if (this.players <= 4) {
-            return 20;
-          } else if (this.players <= 7) {
-            return 24;
-          } else if (this.players <= 14) {
-            return 28;
-          }
-        } else if (this.gamesPerRound === 7) {
-          if (this.players <= 4) {
-            return 28;
-          } else if (this.players <= 7) {
-            return 33;
+        if (this.eliminated === 1) {
+          if (this.gamesPerRound === 1) {
+            if (this.players <= 2) {
+              return 3;
+            } else if (this.players <= 3) {
+              return 4;
+            } else if (this.players <= 4) {
+              return 5;
+            } else if (this.players <= 7) {
+              return 6;
+            } else if (this.players <= 14) {
+              return 7;
+            } else if (this.players <= 23) {
+              return 8;
+            } else if (this.players <= 39) {
+              return 9;
+            } else if (this.players <= 63) {
+              return 10;
+            } else if (this.players <= 127) {
+              return 11;
+            }
+          } else if (this.gamesPerRound === 3) {
+            if (this.players <= 4) {
+              return 13;
+            } else if (this.players <= 5) {
+              return 14;
+            } else if (this.players <= 7) {
+              return 15;
+            } else if (this.players <= 8) {
+              return 16;
+            } else if (this.players <= 14) {
+              return 18;
+            } else if (this.players <= 16) {
+              return 19;
+            } else if (this.players <= 23) {
+              return 20;
+            } else if (this.players <= 24) {
+              return 21;
+            } else if (this.players <= 39) {
+              return 23;
+            } else if (this.players <= 40) {
+              return 24;
+            } else if (this.players <= 63) {
+              return 25;
+            }
+          } else if (this.gamesPerRound === 5) {
+            if (this.players <= 4) {
+              return 20;
+            } else if (this.players <= 5) {
+              return 22;
+            } else if (this.players <= 7) {
+              return 24;
+            } else if (this.players <= 8) {
+              return 26;
+            }
+          } else if (this.gamesPerRound === 7) {
+            if (this.players <= 4) {
+              return 28;
+            }
           }
         }
       } else if (this.playersPerGame === 3 && this.gamesPerRound === 1) {
-        if (this.players <= 9) {
-          return 4;
-        } else if (this.players <= 12) {
-          return 5;
-        } else if (this.players <= 27) {
-          return 6;
-        } else if (this.players <= 80) {
-          return 7;
-        } else if (this.players <= 216) {
-          return 8;
-        } else if (this.players <= 512) {
-          return 9;
+        if (this.eliminated === 2) {
+          if (this.players <= 9) {
+            return 6;
+          } else if (this.players <= 26) {
+            return 8;
+          } else if (this.players <= 27) {
+            return 9;
+          } else if (this.players <= 80) {
+            return 11;
+          } else if (this.players <= 216) {
+            return 12;
+          } else if (this.players <= 512) {
+            return 14;
+          }
+        } else if (this.eliminated === 1) {
+          if (this.players <= 7) {
+            return 10;
+          } else if (this.players <= 9) {
+            return 11;
+          } else if (this.players <= 11) {
+            return 12;
+          } else if (this.players <= 14) {
+            return 14;
+          } else if (this.players <= 19) {
+            return 15;
+          } else if (this.players <= 26) {
+            return 16;
+          } else if (this.players <= 40) {
+            return 18;
+          } else if (this.players <= 52) {
+            return 20;
+          } else if (this.players <= 71) {
+            return 21;
+          } else if (this.players <= 98) {
+            return 23;
+          } else if (this.players <= 139) {
+            return 24;
+          } else if (this.players <= 140) {
+            return 26;
+          }
+        }
+      } else if (this.playersPerGame === 4 && this.gamesPerRound === 1) {
+        if (this.eliminated === 3) {
+          if (this.players <= 15) {
+            return 10;
+          } else if (this.players <= 52) {
+            return 12;
+          } else if (this.players <= 169) {
+            return 14;
+          } else if (this.players <= 511) {
+            return 16;
+          }
+        } else if (this.eliminated === 2) {
+          if (this.players <= 14) {
+            return 14;
+          } else if (this.players <= 23) {
+            return 16;
+          } else if (this.players <= 39) {
+            return 18;
+          } else if (this.players <= 63) {
+            return 20;
+          } else if (this.players <= 127) {
+            return 22;
+          } else if (this.players <= 255) {
+            return 24;
+          } else if (this.players <= 256) {
+            return 26;
+          }
+        } else if (this.eliminated === 1) {
+          if (this.players <= 8) {
+            return 20;
+          } else if (this.players <= 10) {
+            return 22;
+          } else if (this.players <= 14) {
+            return 24;
+          } else if (this.players <= 15) {
+            return 26;
+          }
         }
       }
     } else if (this.strikes === 3) {

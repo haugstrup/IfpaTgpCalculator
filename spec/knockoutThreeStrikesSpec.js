@@ -18,6 +18,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(3);
       tournament.setPlayers(16);
       tournament.setGamesPerRound(3);
+      tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
     expect(foo).toThrowError('Best-of-X is only supported for head-to-head tournaments');
@@ -32,6 +33,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(2);
       tournament.setPlayers(255);
       tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
     expect(firstTooMany).toThrowError('You have too many or too few players players');
@@ -43,6 +45,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(2);
       tournament.setPlayers(3);
       tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
     expect(firstTooFew).toThrowError('You have too many or too few players players');
@@ -55,6 +58,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(3);
       tournament.setPlayers(513);
       tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(2);
       tournament.getMeaningfulGames();
     };
     expect(secondTooMany).toThrowError('You have too many or too few players players');
@@ -65,6 +69,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(3);
       tournament.setPlayers(5);
       tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(2);
       tournament.getMeaningfulGames();
     };
     expect(secondTooFew).toThrowError('You have too many or too few players players');
@@ -77,6 +82,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(2);
       tournament.setPlayers(32);
       tournament.setGamesPerRound(3);
+      tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
     expect(thirdTooMany).toThrowError('You have too many or too few players players');
@@ -88,6 +94,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(2);
       tournament.setPlayers(3);
       tournament.setGamesPerRound(3);
+      tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
     expect(thirdTooFew).toThrowError('You have too many or too few players players');
@@ -100,6 +107,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(2);
       tournament.setPlayers(6);
       tournament.setGamesPerRound(5);
+      tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
     expect(fourthTooMany).toThrowError('You have too many or too few players players');
@@ -111,6 +119,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(2);
       tournament.setPlayers(3);
       tournament.setGamesPerRound(5);
+      tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
     expect(fourthTooFew).toThrowError('You have too many or too few players players');
@@ -123,6 +132,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(2);
       tournament.setPlayers(6);
       tournament.setGamesPerRound(7);
+      tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
     expect(fifthTooMany).toThrowError('You have too many or too few players players');
@@ -134,6 +144,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setPlayersPerGame(2);
       tournament.setPlayers(3);
       tournament.setGamesPerRound(7);
+      tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
     expect(fifthTooFew).toThrowError('You have too many or too few players players');
@@ -145,6 +156,7 @@ describe('A Three-Strikes Knockout tournament', function() {
     // Best-of-1 Matches (2 players with 1 strike per match)
     tournament.setPlayersPerGame(2);
     tournament.setGamesPerRound(1);
+    tournament.setEliminationCount(1);
 
     tournament.setPlayers(4);
     expect(tournament.getMeaningfulGames()).toBe(6);
@@ -179,6 +191,7 @@ describe('A Three-Strikes Knockout tournament', function() {
     // Best-of-1 Matches (3 player matches - 2nd/3rd place get strikes)
     tournament.setPlayersPerGame(3);
     tournament.setGamesPerRound(1);
+    tournament.setEliminationCount(2);
 
     tournament.setPlayers(11);
     expect(tournament.getMeaningfulGames()).toBe(7);
@@ -201,6 +214,7 @@ describe('A Three-Strikes Knockout tournament', function() {
     // Best-of-3 Matches (2 players with 1 strike per match)
     tournament.setPlayersPerGame(2);
     tournament.setGamesPerRound(3);
+    tournament.setEliminationCount(1);
 
     tournament.setPlayers(4);
     expect(tournament.getMeaningfulGames()).toBe(15);
@@ -223,6 +237,7 @@ describe('A Three-Strikes Knockout tournament', function() {
     // Best-of-5 Matches (2 players with 1 strike per match)
     tournament.setPlayersPerGame(2);
     tournament.setGamesPerRound(5);
+    tournament.setEliminationCount(1);
 
     tournament.setPlayers(4);
     expect(tournament.getMeaningfulGames()).toBe(24);
@@ -233,6 +248,7 @@ describe('A Three-Strikes Knockout tournament', function() {
     // Best-of-7 Matches (2 players with 1 strike per match)
     tournament.setPlayersPerGame(2);
     tournament.setGamesPerRound(7);
+    tournament.setEliminationCount(1);
 
     tournament.setPlayers(4);
     expect(tournament.getMeaningfulGames()).toBe(33);

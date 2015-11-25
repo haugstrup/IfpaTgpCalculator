@@ -280,6 +280,15 @@
             </select>
           </div>
 
+          <div class="form-group hidden option option-knockout">
+            <label for="elimination-count">Players receiving a strike</label>
+            <select name="elimination-count" id="elimination-count" class="form-control elimination-count-select">
+              <option value="1">One player receives strike</option>
+              <option value="2">Two players receives strike</option>
+              <option value="3">Three players receives strike</option>
+            </select>
+          </div>
+
           <div class="form-group hidden option option-knockout option-single_elimination">
             <label for="best-of">Games per round</label>
             <select name="best-of" id="best-of" class="form-control best-of-select">
@@ -359,6 +368,7 @@
       tournament.setScores(1);
       tournament.setHours(0);
       tournament.setPlayers(8);
+      tournament.setEliminationCount(1);
       updateTGP();
 
       // Tournament toggle
@@ -408,6 +418,12 @@
       // Rounds select
       $(document).delegate('.rounds-select', 'change', function(e) {
         tournament.setRounds(parseInt($(e.target).val(), 10));
+        updateTGP();
+      });
+
+      // Elimination count
+      $(document).delegate('.elimination-count-select', 'change', function(e) {
+        tournament.setEliminationCount(parseInt($(e.target).val(), 10));
         updateTGP();
       });
 

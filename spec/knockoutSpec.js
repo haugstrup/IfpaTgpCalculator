@@ -20,17 +20,18 @@ describe('A Knockout tournament', function() {
     expect(tournament.getMeaningfulGames()).toBe(0);
   });
 
-  it('throws error when group size is too large', function() {
+  it('throws error when elimination count is too large', function() {
     var foo = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
-      tournament.setPlayersPerGame(4);
+      tournament.setPlayersPerGame(2);
       tournament.setPlayers(16);
       tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(2);
       tournament.getMeaningfulGames();
     };
-    expect(foo).toThrowError('Can only calculate TGP for knockout tournaments with head-to-head or three-player groups');
+    expect(foo).toThrowError('You cannot give all players a strike');
   });
 
 });
