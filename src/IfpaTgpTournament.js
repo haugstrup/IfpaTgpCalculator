@@ -89,6 +89,9 @@ var IfpaTgpTournament = (function(exports){
         if (this.playersPerGame === 4) {
           meaningfulGames = meaningfulGames*2;
         }
+        if (this.playersPerGame === 3) {
+          meaningfulGames = meaningfulGames*1.5;
+        }
       }
     } else if (this.format === 'knockout') {
       meaningfulGames = this.getKnockoutMeaningfulGames();

@@ -41,19 +41,19 @@ describe('A Match Play tournament', function() {
     tournament.setPlayersPerGame(3);
     tournament.setRounds(5);
     tournament.setGamesPerRound(1);
-    expect(tournament.getMeaningfulGames()).toBe(5);
+    expect(tournament.getMeaningfulGames()).toBe(7.5);
 
     tournament.setRounds(5);
     tournament.setGamesPerRound(2);
-    expect(tournament.getMeaningfulGames()).toBe(10);
+    expect(tournament.getMeaningfulGames()).toBe(15);
 
     tournament.setRounds(10);
     tournament.setGamesPerRound(1);
-    expect(tournament.getMeaningfulGames()).toBe(10);
+    expect(tournament.getMeaningfulGames()).toBe(15);
 
     tournament.setRounds(10);
     tournament.setGamesPerRound(5);
-    expect(tournament.getMeaningfulGames()).toBe(50);
+    expect(tournament.getMeaningfulGames()).toBe(75);
   });
 
   it('provides meaningful games for four-player groups', function() {
