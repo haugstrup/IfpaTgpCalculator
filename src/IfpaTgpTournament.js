@@ -2,7 +2,7 @@ var IfpaTgpTournament = (function(exports){
   var Tournament = function() {};
 
   Tournament.prototype.setFormat = function(format) {
-    if (['best_game', 'pingolf', 'match_play', 'single_elimination', 'double_elimination', 'knockout', 'group_bracket', 'ladder'].indexOf(format) === -1) {
+    if (['best_game', 'pingolf', 'match_play', 'single_elimination', 'double_elimination', 'knockout', 'group_bracket'].indexOf(format) === -1) {
       throw new Error("Unknown tournament format");
     }
 
@@ -14,7 +14,7 @@ var IfpaTgpTournament = (function(exports){
       throw new Error("Tournament format not set");
     }
 
-    if (['match_play', 'single_elimination', 'double_elimination', 'knockout', 'ladder', 'group_bracket'].indexOf(this.format) !== -1) {
+    if (['match_play', 'single_elimination', 'double_elimination', 'knockout', 'group_bracket'].indexOf(this.format) !== -1) {
       return true;
     }
     return false;
@@ -95,8 +95,6 @@ var IfpaTgpTournament = (function(exports){
       }
     } else if (this.format === 'knockout') {
       meaningfulGames = this.getKnockoutMeaningfulGames();
-    } else if (this.format === 'ladder') {
-      meaningfulGames = this.getLadderMeaningfulGames();
     } else if (this.format === 'group_bracket') {
       meaningfulGames = this.getGroupBracketMeaningfulGames();
     } else if (this.format === 'single_elimination') {
@@ -504,51 +502,6 @@ var IfpaTgpTournament = (function(exports){
         return 32;
       }
     }
-  };
-
-  Tournament.prototype.getLadderMeaningfulGames = function() {
-    if (!this.players || !this.playersPerGame) {
-      return 0;
-    }
-
-    if (this.playersPerGame === 2) {
-      throw new Error('Ladder tournaments cannot be head-to-head');
-    }
-
-    // Throw error when player count is out of bounds
-    // bounds[playersPerGame]
-    var bounds = {
-      3: [4, 453],
-      4: [4, 271]
-    };
-
-    if (this.players < bounds[this.playersPerGame][0] || this.players > bounds[this.playersPerGame][1]) {
-      throw new Error('You have too many or too few players players');
-    }
-
-    if (this.playersPerGame === 4) {
-      if (this.players <= 4) {
-        return 2;
-      } else if (this.players <= 5) {
-        return 3;
-      } else if (this.players <= 6) {
-        return 5;
-      } else if (this.players <= 12) {
-        return 6;
-      } else if (this.players <= 44) {
-        return 7;
-      } else if (this.players <= 271) {
-        return 8;
-      }
-    } else if (this.playersPerGame === 3) {
-      if (this.players <= 10) {
-        return 2;
-      } else if (this.players <= 453) {
-        return 3;
-      }
-    }
-
-
   };
 
   Tournament.prototype.getKnockoutMeaningfulGames = function() {
