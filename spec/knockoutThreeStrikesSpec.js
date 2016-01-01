@@ -26,19 +26,19 @@ describe('A Three-Strikes Knockout tournament', function() {
 
   it('throws error if player count is out of bounds', function() {
     // Best-of-1 Matches (2 players with 1 strike per match)
-    var firstTooMany = function() {
+    var aTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
       tournament.setPlayersPerGame(2);
-      tournament.setPlayers(255);
+      tournament.setPlayers(129);
       tournament.setGamesPerRound(1);
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(firstTooMany).toThrowError('You have too many or too few players players');
+    expect(aTooMany).toThrowError('You have too many or too few players players');
 
-    var firstTooFew = function() {
+    var aTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
@@ -48,10 +48,10 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(firstTooFew).toThrowError('You have too many or too few players players');
+    expect(aTooFew).toThrowError('You have too many or too few players players');
 
     // Best-of-1 Matches (3 player matches - 2nd/3rd place get strikes)
-    var secondTooMany = function() {
+    var bTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
@@ -61,8 +61,8 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(2);
       tournament.getMeaningfulGames();
     };
-    expect(secondTooMany).toThrowError('You have too many or too few players players');
-    var secondTooFew = function() {
+    expect(bTooMany).toThrowError('You have too many or too few players players');
+    var bTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
@@ -72,22 +72,118 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(2);
       tournament.getMeaningfulGames();
     };
-    expect(secondTooFew).toThrowError('You have too many or too few players players');
+    expect(bTooFew).toThrowError('You have too many or too few players players');
+
+    // Best-of-1 Matches (3 player matches - 3rd place get strikes)
+    var cTooMany = function() {
+      tournament = new IfpaTgpTournament();
+      tournament.setFormat('knockout');
+      tournament.setStrikes(3);
+      tournament.setPlayersPerGame(3);
+      tournament.setPlayers(46);
+      tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(1);
+      tournament.getMeaningfulGames();
+    };
+    expect(cTooMany).toThrowError('You have too many or too few players players');
+    var cTooFew = function() {
+      tournament = new IfpaTgpTournament();
+      tournament.setFormat('knockout');
+      tournament.setStrikes(3);
+      tournament.setPlayersPerGame(3);
+      tournament.setPlayers(5);
+      tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(1);
+      tournament.getMeaningfulGames();
+    };
+    expect(cTooFew).toThrowError('You have too many or too few players players');
+
+    // Best-of-1 Matches (4 player matches - 2nd/3rd/4th place get strikes)
+    var dTooMany = function() {
+      tournament = new IfpaTgpTournament();
+      tournament.setFormat('knockout');
+      tournament.setStrikes(3);
+      tournament.setPlayersPerGame(4);
+      tournament.setPlayers(513);
+      tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(3);
+      tournament.getMeaningfulGames();
+    };
+    expect(dTooMany).toThrowError('You have too many or too few players players');
+    var dTooFew = function() {
+      tournament = new IfpaTgpTournament();
+      tournament.setFormat('knockout');
+      tournament.setStrikes(3);
+      tournament.setPlayersPerGame(4);
+      tournament.setPlayers(7);
+      tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(3);
+      tournament.getMeaningfulGames();
+    };
+    expect(dTooFew).toThrowError('You have too many or too few players players');
+
+    // Best-of-1 Matches (4 player matches - 3rd/4th place get strikes)
+    var eTooMany = function() {
+      tournament = new IfpaTgpTournament();
+      tournament.setFormat('knockout');
+      tournament.setStrikes(3);
+      tournament.setPlayersPerGame(4);
+      tournament.setPlayers(59);
+      tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(2);
+      tournament.getMeaningfulGames();
+    };
+    expect(eTooMany).toThrowError('You have too many or too few players players');
+    var eTooFew = function() {
+      tournament = new IfpaTgpTournament();
+      tournament.setFormat('knockout');
+      tournament.setStrikes(3);
+      tournament.setPlayersPerGame(4);
+      tournament.setPlayers(7);
+      tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(2);
+      tournament.getMeaningfulGames();
+    };
+    expect(eTooFew).toThrowError('You have too many or too few players players');
+
+    // Best-of-1 Matches (4 player matches - 4th place get strikes)
+    var fTooMany = function() {
+      tournament = new IfpaTgpTournament();
+      tournament.setFormat('knockout');
+      tournament.setStrikes(3);
+      tournament.setPlayersPerGame(4);
+      tournament.setPlayers(10);
+      tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(1);
+      tournament.getMeaningfulGames();
+    };
+    expect(fTooMany).toThrowError('You have too many or too few players players');
+    var fTooFew = function() {
+      tournament = new IfpaTgpTournament();
+      tournament.setFormat('knockout');
+      tournament.setStrikes(3);
+      tournament.setPlayersPerGame(4);
+      tournament.setPlayers(7);
+      tournament.setGamesPerRound(1);
+      tournament.setEliminationCount(1);
+      tournament.getMeaningfulGames();
+    };
+    expect(fTooFew).toThrowError('You have too many or too few players players');
 
     // Best-of-3 Matches (2 players with 1 strike per match)
-    var thirdTooMany = function() {
+    var gTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
       tournament.setPlayersPerGame(2);
-      tournament.setPlayers(32);
+      tournament.setPlayers(24);
       tournament.setGamesPerRound(3);
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(thirdTooMany).toThrowError('You have too many or too few players players');
+    expect(gTooMany).toThrowError('You have too many or too few players players');
 
-    var thirdTooFew = function() {
+    var gTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
@@ -97,10 +193,10 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(thirdTooFew).toThrowError('You have too many or too few players players');
+    expect(gTooFew).toThrowError('You have too many or too few players players');
 
     // Best-of-5 Matches (2 players with 1 strike per match)
-    var fourthTooMany = function() {
+    var hTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
@@ -110,9 +206,9 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(fourthTooMany).toThrowError('You have too many or too few players players');
+    expect(hTooMany).toThrowError('You have too many or too few players players');
 
-    var fourthTooFew = function() {
+    var hTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
@@ -122,22 +218,22 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(fourthTooFew).toThrowError('You have too many or too few players players');
+    expect(hTooFew).toThrowError('You have too many or too few players players');
 
     // Best-of-7 Matches (2 players with 1 strike per match)
-    var fifthTooMany = function() {
+    var iTooMany = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
       tournament.setPlayersPerGame(2);
-      tournament.setPlayers(6);
+      tournament.setPlayers(5);
       tournament.setGamesPerRound(7);
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(fifthTooMany).toThrowError('You have too many or too few players players');
+    expect(iTooMany).toThrowError('You have too many or too few players players');
 
-    var fifthTooFew = function() {
+    var iTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
       tournament.setStrikes(3);
@@ -147,7 +243,7 @@ describe('A Three-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(fifthTooFew).toThrowError('You have too many or too few players players');
+    expect(iTooFew).toThrowError('You have too many or too few players players');
   });
 
   it('provides meaningful games', function() {
@@ -182,34 +278,123 @@ describe('A Three-Strikes Knockout tournament', function() {
     tournament.setPlayers(87);
     expect(tournament.getMeaningfulGames()).toBe(13);
 
-    tournament.setPlayers(143);
+    tournament.setPlayers(128);
     expect(tournament.getMeaningfulGames()).toBe(14);
-
-    tournament.setPlayers(254);
-    expect(tournament.getMeaningfulGames()).toBe(15);
 
     // Best-of-1 Matches (3 player matches - 2nd/3rd place get strikes)
     tournament.setPlayersPerGame(3);
     tournament.setGamesPerRound(1);
     tournament.setEliminationCount(2);
 
-    tournament.setPlayers(11);
-    expect(tournament.getMeaningfulGames()).toBe(7);
-
-    tournament.setPlayers(26);
-    expect(tournament.getMeaningfulGames()).toBe(8);
-
-    tournament.setPlayers(52);
-    expect(tournament.getMeaningfulGames()).toBe(9);
-
-    tournament.setPlayers(108);
+    tournament.setPlayers(9);
     expect(tournament.getMeaningfulGames()).toBe(10);
 
-    tournament.setPlayers(242);
+    tournament.setPlayers(11);
     expect(tournament.getMeaningfulGames()).toBe(11);
 
-    tournament.setPlayers(512);
+    tournament.setPlayers(26);
     expect(tournament.getMeaningfulGames()).toBe(12);
+
+    tournament.setPlayers(52);
+    expect(tournament.getMeaningfulGames()).toBe(14);
+
+    tournament.setPlayers(108);
+    expect(tournament.getMeaningfulGames()).toBe(15);
+
+    tournament.setPlayers(242);
+    expect(tournament.getMeaningfulGames()).toBe(17);
+
+    tournament.setPlayers(512);
+    expect(tournament.getMeaningfulGames()).toBe(18);
+
+    // Best-of-1 Matches (3 player matches - 3rd place get strikes)
+    tournament.setPlayersPerGame(3);
+    tournament.setGamesPerRound(1);
+    tournament.setEliminationCount(1);
+
+    tournament.setPlayers(6);
+    expect(tournament.getMeaningfulGames()).toBe(11);
+
+    tournament.setPlayers(7);
+    expect(tournament.getMeaningfulGames()).toBe(13);
+
+    tournament.setPlayers(8);
+    expect(tournament.getMeaningfulGames()).toBe(14);
+
+    tournament.setPlayers(9);
+    expect(tournament.getMeaningfulGames()).toBe(16);
+
+    tournament.setPlayers(11);
+    expect(tournament.getMeaningfulGames()).toBe(17);
+
+    tournament.setPlayers(15);
+    expect(tournament.getMeaningfulGames()).toBe(18);
+
+    tournament.setPlayers(19);
+    expect(tournament.getMeaningfulGames()).toBe(20);
+
+    tournament.setPlayers(25);
+    expect(tournament.getMeaningfulGames()).toBe(21);
+
+    tournament.setPlayers(34);
+    expect(tournament.getMeaningfulGames()).toBe(23);
+
+    tournament.setPlayers(44);
+    expect(tournament.getMeaningfulGames()).toBe(24);
+
+    tournament.setPlayers(45);
+    expect(tournament.getMeaningfulGames()).toBe(26);
+
+    // Best-of-1 Matches (4 player matches - 2nd/3rd/4th place get strikes)
+    tournament.setPlayersPerGame(4);
+    tournament.setGamesPerRound(1);
+    tournament.setEliminationCount(3);
+
+    tournament.setPlayers(9);
+    expect(tournament.getMeaningfulGames()).toBe(12);
+
+    tournament.setPlayers(30);
+    expect(tournament.getMeaningfulGames()).toBe(14);
+
+    tournament.setPlayers(84);
+    expect(tournament.getMeaningfulGames()).toBe(16);
+
+    tournament.setPlayers(254);
+    expect(tournament.getMeaningfulGames()).toBe(18);
+
+    tournament.setPlayers(512);
+    expect(tournament.getMeaningfulGames()).toBe(20);
+
+    // Best-of-1 Matches (4 player matches - 3rd/4th place get strikes)
+    tournament.setPlayersPerGame(4);
+    tournament.setGamesPerRound(1);
+    tournament.setEliminationCount(2);
+
+    tournament.setPlayers(14);
+    expect(tournament.getMeaningfulGames()).toBe(18);
+
+    tournament.setPlayers(23);
+    expect(tournament.getMeaningfulGames()).toBe(20);
+
+    tournament.setPlayers(31);
+    expect(tournament.getMeaningfulGames()).toBe(22);
+
+    tournament.setPlayers(57);
+    expect(tournament.getMeaningfulGames()).toBe(24);
+
+    tournament.setPlayers(58);
+    expect(tournament.getMeaningfulGames()).toBe(26);
+
+    // Best-of-1 Matches (4 player matches - 4th place get strikes)
+    tournament.setPlayersPerGame(4);
+    tournament.setGamesPerRound(1);
+    tournament.setEliminationCount(1);
+
+    tournament.setPlayers(8);
+    expect(tournament.getMeaningfulGames()).toBe(23);
+
+    tournament.setPlayers(9);
+    expect(tournament.getMeaningfulGames()).toBe(25);
 
     // Best-of-3 Matches (2 players with 1 strike per match)
     tournament.setPlayersPerGame(2);
@@ -222,17 +407,23 @@ describe('A Three-Strikes Knockout tournament', function() {
     tournament.setPlayers(5);
     expect(tournament.getMeaningfulGames()).toBe(18);
 
+    tournament.setPlayers(6);
+    expect(tournament.getMeaningfulGames()).toBe(19);
+
     tournament.setPlayers(7);
     expect(tournament.getMeaningfulGames()).toBe(20);
+
+    tournament.setPlayers(8);
+    expect(tournament.getMeaningfulGames()).toBe(21);
 
     tournament.setPlayers(14);
     expect(tournament.getMeaningfulGames()).toBe(23);
 
+    tournament.setPlayers(16);
+    expect(tournament.getMeaningfulGames()).toBe(24);
+
     tournament.setPlayers(23);
     expect(tournament.getMeaningfulGames()).toBe(25);
-
-    tournament.setPlayers(31);
-    expect(tournament.getMeaningfulGames()).toBe(28);
 
     // Best-of-5 Matches (2 players with 1 strike per match)
     tournament.setPlayersPerGame(2);
@@ -252,9 +443,6 @@ describe('A Three-Strikes Knockout tournament', function() {
 
     tournament.setPlayers(4);
     expect(tournament.getMeaningfulGames()).toBe(33);
-
-    tournament.setPlayers(5);
-    expect(tournament.getMeaningfulGames()).toBe(39);
   });
 
 });
