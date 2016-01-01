@@ -37,11 +37,6 @@ describe('A tournament', function() {
     expect(tournament.format).toBe('knockout');
   });
 
-  it('can set format to ladder', function() {
-    tournament.setFormat('ladder');
-    expect(tournament.format).toBe('ladder');
-  });
-
   it('throws error on bad format', function() {
     var foo = function() {
       tournament.setFormat('foobar');
@@ -116,9 +111,6 @@ describe('A tournament', function() {
     tournament.setFormat('knockout');
     expect(tournament.isDirect()).toBe(true);
 
-    tournament.setFormat('ladder');
-    expect(tournament.isDirect()).toBe(true);
-
     tournament.setFormat('group_bracket');
     expect(tournament.isDirect()).toBe(true);
   });
@@ -140,9 +132,6 @@ describe('A tournament', function() {
     expect(tournament.isIndirect()).toBe(false);
 
     tournament.setFormat('knockout');
-    expect(tournament.isIndirect()).toBe(false);
-
-    tournament.setFormat('ladder');
     expect(tournament.isIndirect()).toBe(false);
 
     tournament.setFormat('group_bracket');
