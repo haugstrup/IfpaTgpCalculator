@@ -106,6 +106,112 @@ var IfpaTgpTournament = (function(exports){
     return meaningfulGames;
   };
 
+  Tournament.prototype.getBounds = function() {
+    var bounds;
+
+    if (this.format === 'knockout') {
+      // bounds[strikes][playersPerGame][gamesPerRound][strikesPerGame]
+      bounds = {
+        // Two strikes
+        2: {
+          // Head-to-head
+          2: {
+            // Best-of-1
+            1: {1: [2, 127]},
+            // Best-of-3
+            3: {1: [4, 63]},
+            // Best-of-5
+            5: {1: [4, 8]},
+            // Best-of-7
+            7: {1: [4, 4]}
+          },
+          // Three-player groups
+          3: {
+            // Best-of-1
+            1: {1: [6, 140], 2: [6, 512]}
+          },
+          // Four-player groups
+          4: {
+            // Best-of-1
+            1: {1: [8, 15], 2: [8, 256], 3: [8, 511]}
+          }
+        },
+        // Three strikes
+        3: {
+          // Head-to-head
+          2: {
+            1: {1: [4, 128]},
+            3: {1: [4, 23]},
+            5: {1: [4, 5]},
+            7: {1: [4, 4]}
+          },
+          // Three-player groups
+          3: {
+            1: {1: [6, 45], 2: [6, 512]}
+          },
+          // Four-player groups
+          4: {
+            1: {1: [8, 9], 2: [8, 58], 3: [8, 512]}
+          }
+        },
+        // Four strikes
+        4: {
+          // Head-to-head
+          2: {
+            1: {1: [4, 119]},
+            3: {1: [4, 8]},
+            5: {1: [4, 4]},
+            7: {1: [4, 4]}
+          },
+          // Three-player groups
+          3: {
+            1: {1: [6, 24], 2: [6, 512]}
+          },
+          // Four-player groups
+          4: {
+            1: {1: [8, 8], 2: [8, 24], 3: [8, 512]}
+          }
+        }
+      };
+
+      return [bounds[this.strikes][this.playersPerGame][this.gamesPerRound][this.eliminated][0], bounds[this.strikes][this.playersPerGame][this.gamesPerRound][this.eliminated][1]];
+    } else if (this.format === 'group_bracket') {
+      // bounds[gamesPerRound]
+      bounds = {
+        3: [4, 91],
+        4: [4, 45]
+      };
+
+      return [bounds[this.gamesPerRound][0], bounds[this.gamesPerRound][1]];
+    } else if (this.format === 'single_elimination') {
+      // bounds[gamesPerRound]
+      bounds = {
+        1: [4, 350],
+        3: [4, 294],
+        5: [4, 82],
+        7: [4, 24]
+      };
+
+      return [bounds[this.gamesPerRound][0], bounds[this.gamesPerRound][1]];
+    } else if (this.format === 'double_elimination') {
+      // bounds[doubleEliminationGamesPerRound]
+      bounds = {
+        '1:1': [4, 511],
+        '3:1': [4, 608],
+        '3:3': [4, 207],
+        '5:1': [4, 724],
+        '5:3': [4, 73],
+        '5:5': [4, 14],
+        '7:1': [4, 430],
+        '7:3': [4, 23],
+        '7:5': [4, 7],
+        '7:7': [4, 4]
+      };
+
+      return [bounds[this.doubleEliminationGamesPerRound][0], bounds[this.doubleEliminationGamesPerRound][1]];
+    }
+  };
+
   Tournament.prototype.getTGP = function() {
     var tgp = 0;
 
@@ -124,22 +230,14 @@ var IfpaTgpTournament = (function(exports){
     }
 
     // Throw error when player count is out of bounds
-    // bounds[doubleEliminationGamesPerRound]
-    var bounds = {
-      '1:1': [4, 511],
-      '3:1': [4, 608],
-      '3:3': [4, 207],
-      '5:1': [4, 724],
-      '5:3': [4, 73],
-      '5:5': [4, 14],
-      '7:1': [4, 430],
-      '7:3': [4, 23],
-      '7:5': [4, 7],
-      '7:7': [4, 4]
-    };
+    var bounds = this.getBounds();
 
-    if (this.players < bounds[this.doubleEliminationGamesPerRound][0] || this.players > bounds[this.doubleEliminationGamesPerRound][1]) {
-      throw new Error('You have too many or too few players players');
+    if (this.players < bounds[0]) {
+      throw new Error('You need at least '+bounds[0]+' players');
+    }
+
+    if (this.players > bounds[1]) {
+      throw new Error('You can have no more than '+bounds[1]+' players');
     }
 
     if (this.doubleEliminationGamesPerRound === '1:1') {
@@ -328,15 +426,14 @@ var IfpaTgpTournament = (function(exports){
 
     // Throw error when player count is out of bounds
     // bounds[gamesPerRound]
-    var bounds = {
-      1: [4, 350],
-      3: [4, 294],
-      5: [4, 82],
-      7: [4, 24]
-    };
+    var bounds = this.getBounds();
 
-    if (this.players < bounds[this.gamesPerRound][0] || this.players > bounds[this.gamesPerRound][1]) {
-      throw new Error('You have too many or too few players players');
+    if (this.players < bounds[0]) {
+      throw new Error('You need at least '+bounds[0]+' players');
+    }
+
+    if (this.players > bounds[1]) {
+      throw new Error('You can have no more than '+bounds[1]+' players');
     }
 
     if (this.gamesPerRound === 1) {
@@ -469,14 +566,14 @@ var IfpaTgpTournament = (function(exports){
     }
 
     // Throw error when player count is out of bounds
-    // bounds[gamesPerRound]
-    var bounds = {
-      3: [4, 91],
-      4: [4, 45]
-    };
+    var bounds = this.getBounds();
 
-    if (this.players < bounds[this.gamesPerRound][0] || this.players > bounds[this.gamesPerRound][1]) {
-      throw new Error('You have too many or too few players players');
+    if (this.players < bounds[0]) {
+      throw new Error('You need at least '+bounds[0]+' players');
+    }
+
+    if (this.players > bounds[1]) {
+      throw new Error('You can have no more than '+bounds[1]+' players');
     }
 
     if (this.gamesPerRound === 3) {
@@ -518,72 +615,14 @@ var IfpaTgpTournament = (function(exports){
     }
 
     // Throw error when player count is out of bounds
-    // bounds[strikes][playersPerGame][gamesPerRound][strikesPerGame]
-    var bounds = {
-      // Two strikes
-      2: {
-        // Head-to-head
-        2: {
-          // Best-of-1
-          1: {1: [2, 127]},
-          // Best-of-3
-          3: {1: [4, 63]},
-          // Best-of-5
-          5: {1: [4, 8]},
-          // Best-of-7
-          7: {1: [4, 4]}
-        },
-        // Three-player groups
-        3: {
-          // Best-of-1
-          1: {1: [6, 140], 2: [6, 512]}
-        },
-        // Four-player groups
-        4: {
-          // Best-of-1
-          1: {1: [8, 15], 2: [8, 256], 3: [8, 511]}
-        }
-      },
-      // Three strikes
-      3: {
-        // Head-to-head
-        2: {
-          1: {1: [4, 128]},
-          3: {1: [4, 23]},
-          5: {1: [4, 5]},
-          7: {1: [4, 4]}
-        },
-        // Three-player groups
-        3: {
-          1: {1: [6, 45], 2: [6, 512]}
-        },
-        // Four-player groups
-        4: {
-          1: {1: [8, 9], 2: [8, 58], 3: [8, 512]}
-        }
-      },
-      // Four strikes
-      4: {
-        // Head-to-head
-        2: {
-          1: {1: [4, 119]},
-          3: {1: [4, 8]},
-          5: {1: [4, 4]},
-          7: {1: [4, 4]}
-        },
-        // Three-player groups
-        3: {
-          1: {1: [6, 24], 2: [6, 512]}
-        },
-        // Four-player groups
-        4: {
-          1: {1: [8, 8], 2: [8, 24], 3: [8, 512]}
-        }
-      }
-    };
+    var bounds = this.getBounds();
 
-    if (this.players < bounds[this.strikes][this.playersPerGame][this.gamesPerRound][this.eliminated][0] || this.players > bounds[this.strikes][this.playersPerGame][this.gamesPerRound][this.eliminated][1]) {
-      throw new Error('You have too many or too few players players');
+    if (this.players < bounds[0]) {
+      throw new Error('You need at least '+bounds[0]+' players');
+    }
+
+    if (this.players > bounds[1]) {
+      throw new Error('You can have no more than '+bounds[1]+' players');
     }
 
     if (this.strikes === 2) {

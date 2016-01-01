@@ -35,7 +35,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(aTooMany).toThrowError('You have too many or too few players players');
+    expect(aTooMany).toThrowError('You can have no more than 127 players');
 
     var aTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -47,7 +47,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(aTooFew).toThrowError('You have too many or too few players players');
+    expect(aTooFew).toThrowError('You need at least 2 players');
 
     // Best-of-1 Matches (3 player matches - 2nd/3rd place get strikes)
     var bTooMany = function() {
@@ -60,7 +60,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(2);
       tournament.getMeaningfulGames();
     };
-    expect(bTooMany).toThrowError('You have too many or too few players players');
+    expect(bTooMany).toThrowError('You can have no more than 512 players');
     var bTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
@@ -71,7 +71,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(2);
       tournament.getMeaningfulGames();
     };
-    expect(bTooFew).toThrowError('You have too many or too few players players');
+    expect(bTooFew).toThrowError('You need at least 6 players');
 
     // Best-of-1 Matches (3 player matches - 3rd place get strike - receives 1.5X bonus for 3-player games)
     var cTooMany = function() {
@@ -84,7 +84,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(cTooMany).toThrowError('You have too many or too few players players');
+    expect(cTooMany).toThrowError('You can have no more than 140 players');
     var cTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
@@ -95,7 +95,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(cTooFew).toThrowError('You have too many or too few players players');
+    expect(cTooFew).toThrowError('You need at least 6 players');
 
     // Best-of-1 Matches (4 player matches - 2nd/3rd/4th place get strikes - receives 2X bonus for 4-player games)
     var dTooMany = function() {
@@ -108,7 +108,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(3);
       tournament.getMeaningfulGames();
     };
-    expect(dTooMany).toThrowError('You have too many or too few players players');
+    expect(dTooMany).toThrowError('You can have no more than 511 players');
     var dTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
@@ -119,7 +119,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(3);
       tournament.getMeaningfulGames();
     };
-    expect(dTooFew).toThrowError('You have too many or too few players players');
+    expect(dTooFew).toThrowError('You need at least 8 players');
 
     // Best-of-1 Matches (4 player matches - 3rd/4th place get strikes - receives 2X bonus for 4-player games)
     var eTooMany = function() {
@@ -132,7 +132,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(2);
       tournament.getMeaningfulGames();
     };
-    expect(eTooMany).toThrowError('You have too many or too few players players');
+    expect(eTooMany).toThrowError('You can have no more than 256 players');
     var eTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
@@ -143,7 +143,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(2);
       tournament.getMeaningfulGames();
     };
-    expect(eTooFew).toThrowError('You have too many or too few players players');
+    expect(eTooFew).toThrowError('You need at least 8 players');
 
     // Best-of-1 Matches (4 player matches - 4th place get strikes - receives 2X bonus for 4-player games)
     var fTooMany = function() {
@@ -156,7 +156,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(fTooMany).toThrowError('You have too many or too few players players');
+    expect(fTooMany).toThrowError('You can have no more than 15 players');
     var fTooFew = function() {
       tournament = new IfpaTgpTournament();
       tournament.setFormat('knockout');
@@ -167,7 +167,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(fTooFew).toThrowError('You have too many or too few players players');
+    expect(fTooFew).toThrowError('You need at least 8 players');
 
     // Best-of-3 Matches (2 players with 1 strike per match)
     var gTooMany = function() {
@@ -180,7 +180,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(gTooMany).toThrowError('You have too many or too few players players');
+    expect(gTooMany).toThrowError('You can have no more than 63 players');
 
     var gTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -192,7 +192,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(gTooFew).toThrowError('You have too many or too few players players');
+    expect(gTooFew).toThrowError('You need at least 4 players');
 
     // Best-of-5 Matches (2 players with 1 strike per match)
     var hTooMany = function() {
@@ -205,7 +205,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(hTooMany).toThrowError('You have too many or too few players players');
+    expect(hTooMany).toThrowError('You can have no more than 8 players');
 
     var hTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -217,7 +217,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(hTooFew).toThrowError('You have too many or too few players players');
+    expect(hTooFew).toThrowError('You need at least 4 players');
 
     // Best-of-7 Matches (2 players with 1 strike per match)
     var iTooMany = function() {
@@ -230,7 +230,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(iTooMany).toThrowError('You have too many or too few players players');
+    expect(iTooMany).toThrowError('You can have no more than 4 players');
 
     var iTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -242,7 +242,7 @@ describe('A Two-Strikes Knockout tournament', function() {
       tournament.setEliminationCount(1);
       tournament.getMeaningfulGames();
     };
-    expect(iTooFew).toThrowError('You have too many or too few players players');
+    expect(iTooFew).toThrowError('You need at least 4 players');
   });
 
   it('provides meaningful games', function() {

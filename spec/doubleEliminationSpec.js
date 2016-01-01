@@ -29,7 +29,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('1:1');
       tournament.getMeaningfulGames();
     };
-    expect(firstTooMany).toThrowError('You have too many or too few players players');
+    expect(firstTooMany).toThrowError('You can have no more than 511 players');
 
     var firstTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -38,7 +38,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('1:1');
       tournament.getMeaningfulGames();
     };
-    expect(firstTooFew).toThrowError('You have too many or too few players players');
+    expect(firstTooFew).toThrowError('You need at least 4 players');
 
     // Best of 3:1
     var secondTooMany = function() {
@@ -48,7 +48,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('3:1');
       tournament.getMeaningfulGames();
     };
-    expect(secondTooMany).toThrowError('You have too many or too few players players');
+    expect(secondTooMany).toThrowError('You can have no more than 608 players');
 
     var secondTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -57,7 +57,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('3:1');
       tournament.getMeaningfulGames();
     };
-    expect(secondTooFew).toThrowError('You have too many or too few players players');
+    expect(secondTooFew).toThrowError('You need at least 4 players');
 
     // Best of 3:3
     var thirdTooMany = function() {
@@ -67,7 +67,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('3:3');
       tournament.getMeaningfulGames();
     };
-    expect(thirdTooMany).toThrowError('You have too many or too few players players');
+    expect(thirdTooMany).toThrowError('You can have no more than 207 players');
 
     var thirdTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -76,7 +76,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('3:3');
       tournament.getMeaningfulGames();
     };
-    expect(thirdTooFew).toThrowError('You have too many or too few players players');
+    expect(thirdTooFew).toThrowError('You need at least 4 players');
 
     // Best of 5:1
     var fourthTooMany = function() {
@@ -86,7 +86,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('5:1');
       tournament.getMeaningfulGames();
     };
-    expect(fourthTooMany).toThrowError('You have too many or too few players players');
+    expect(fourthTooMany).toThrowError('You can have no more than 724 players');
 
     var fourthTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -95,7 +95,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('5:1');
       tournament.getMeaningfulGames();
     };
-    expect(fourthTooFew).toThrowError('You have too many or too few players players');
+    expect(fourthTooFew).toThrowError('You need at least 4 players');
 
     // Best of 5:3
     var fifthTooMany = function() {
@@ -105,7 +105,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('5:3');
       tournament.getMeaningfulGames();
     };
-    expect(fifthTooMany).toThrowError('You have too many or too few players players');
+    expect(fifthTooMany).toThrowError('You can have no more than 73 players');
 
     var fifthTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -114,7 +114,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('5:3');
       tournament.getMeaningfulGames();
     };
-    expect(fifthTooFew).toThrowError('You have too many or too few players players');
+    expect(fifthTooFew).toThrowError('You need at least 4 players');
 
     // Best of 5:5
     var sixthTooMany = function() {
@@ -124,7 +124,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('5:5');
       tournament.getMeaningfulGames();
     };
-    expect(sixthTooMany).toThrowError('You have too many or too few players players');
+    expect(sixthTooMany).toThrowError('You can have no more than 14 players');
 
     var sixthTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -133,7 +133,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('5:5');
       tournament.getMeaningfulGames();
     };
-    expect(sixthTooFew).toThrowError('You have too many or too few players players');
+    expect(sixthTooFew).toThrowError('You need at least 4 players');
 
     // Best of 7:1
     var seventhTooMany = function() {
@@ -143,7 +143,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('7:1');
       tournament.getMeaningfulGames();
     };
-    expect(seventhTooMany).toThrowError('You have too many or too few players players');
+    expect(seventhTooMany).toThrowError('You can have no more than 430 players');
 
     var seventhTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -152,7 +152,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('7:1');
       tournament.getMeaningfulGames();
     };
-    expect(seventhTooFew).toThrowError('You have too many or too few players players');
+    expect(seventhTooFew).toThrowError('You need at least 4 players');
 
     // Best of 7:3
     var eighthTooMany = function() {
@@ -162,7 +162,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('7:3');
       tournament.getMeaningfulGames();
     };
-    expect(eighthTooMany).toThrowError('You have too many or too few players players');
+    expect(eighthTooMany).toThrowError('You can have no more than 23 players');
 
     var eighthTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -171,7 +171,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('7:3');
       tournament.getMeaningfulGames();
     };
-    expect(eighthTooFew).toThrowError('You have too many or too few players players');
+    expect(eighthTooFew).toThrowError('You need at least 4 players');
 
     // Best of 7:5
     var ninthTooMany = function() {
@@ -181,7 +181,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('7:5');
       tournament.getMeaningfulGames();
     };
-    expect(ninthTooMany).toThrowError('You have too many or too few players players');
+    expect(ninthTooMany).toThrowError('You can have no more than 7 players');
 
     var ninthTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -190,7 +190,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('7:5');
       tournament.getMeaningfulGames();
     };
-    expect(ninthTooFew).toThrowError('You have too many or too few players players');
+    expect(ninthTooFew).toThrowError('You need at least 4 players');
 
     // Best of 7:7
     var tenthTooMany = function() {
@@ -200,7 +200,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('7:7');
       tournament.getMeaningfulGames();
     };
-    expect(tenthTooMany).toThrowError('You have too many or too few players players');
+    expect(tenthTooMany).toThrowError('You can have no more than 4 players');
 
     var tenthTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -209,7 +209,7 @@ describe('A Double Elimination tournament', function() {
       tournament.setDoubleEliminationGamesPerRound('7:7');
       tournament.getMeaningfulGames();
     };
-    expect(tenthTooFew).toThrowError('You have too many or too few players players');
+    expect(tenthTooFew).toThrowError('You need at least 4 players');
   });
 
   it('provides meaningful games for best of 1:1', function() {

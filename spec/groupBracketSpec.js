@@ -35,7 +35,7 @@ describe('A Group Bracket tournament', function() {
       tournament.setGamesPerRound(3);
       tournament.getMeaningfulGames();
     };
-    expect(firstTooMany).toThrowError('You have too many or too few players players');
+    expect(firstTooMany).toThrowError('You can have no more than 91 players');
 
     var firstTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -44,7 +44,7 @@ describe('A Group Bracket tournament', function() {
       tournament.setGamesPerRound(3);
       tournament.getMeaningfulGames();
     };
-    expect(firstTooFew).toThrowError('You have too many or too few players players');
+    expect(firstTooFew).toThrowError('You need at least 4 players');
 
     // 4 game rounds
     var secondTooMany = function() {
@@ -54,7 +54,7 @@ describe('A Group Bracket tournament', function() {
       tournament.setGamesPerRound(4);
       tournament.getMeaningfulGames();
     };
-    expect(secondTooMany).toThrowError('You have too many or too few players players');
+    expect(secondTooMany).toThrowError('You can have no more than 45 players');
 
     var secondTooFew = function() {
       tournament = new IfpaTgpTournament();
@@ -63,7 +63,7 @@ describe('A Group Bracket tournament', function() {
       tournament.setGamesPerRound(4);
       tournament.getMeaningfulGames();
     };
-    expect(secondTooFew).toThrowError('You have too many or too few players players');
+    expect(secondTooFew).toThrowError('You need at least 4 players');
   });
 
   it('provides meaningful games for 3 game rounds', function() {
